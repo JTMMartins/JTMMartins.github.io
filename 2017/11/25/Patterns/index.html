@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+        <title>
+            
+                Design Patterns introduction |
+                    
+                        JoseMartins
+        </title>
+        
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+                
+                    <meta name="keywords" content="Design Patterns,Architecture" />
+                    
+                        <meta name="description" content="When we arrive to the world of object oriented programming (OOP), one of the first terms we encounter is design patterns. Design patterns are important stuff, and we really need to understand them.">
+<meta name="keywords" content="Design Patterns,Architecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design Patterns introduction">
+<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;25&#x2F;Patterns&#x2F;index.html">
+<meta property="og:site_name" content="JoseMartins">
+<meta property="og:description" content="When we arrive to the world of object oriented programming (OOP), one of the first terms we encounter is design patterns. Design patterns are important stuff, and we really need to understand them.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;25&#x2F;Patterns&#x2F;designpatterns.jpg">
+<meta property="og:updated_time" content="2017-11-28T18:02:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;25&#x2F;Patterns&#x2F;designpatterns.jpg">
+                            
+
+                                
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/is_archive/Arimo/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110239987-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Make it correct, make it clear, make it concise, make it fast. In that order.</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/">Architecture</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/">Frameworks</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/">Java Language</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://jtmmartins.github.io/about/index">Resumé</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Patterns" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Design Patterns introduction
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/11/25/Patterns/" class="article-date">
+            <time datetime="2017-11-25T21:17:34.000Z" itemprop="datePublished">2017-11-25</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Architecture/" rel="tag">Architecture</a>, <a class="tag-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="/2017/11/25/Patterns/designpatterns.jpg" class="" title="[Design patterns]">
+
+<p>When we arrive to the world of object oriented programming <strong>(OOP)</strong>, one of the first terms we encounter is <strong>design patterns</strong>.</p>
+<p>Design patterns are important stuff, and we really need to understand them.</p>
+<p>As everything in life, some of these patterns are easier to understand than others, but as long as you have understood the principles of OOP as inheritance, composition , polymorphism and encapsulation and have your mind oriented to think in the “object way” you will be half way there.</p>
+<p>Design patterns are probably one of the most influential development strategies that came out of the minds behind the <strong>OOP</strong> thinkers and comes hand to hand with software reuse.</p>
+<p>So the first question we normally put to ourselves is :</p>
+<h3 id="What-are-these-Design-Pattern-things"><a href="#What-are-these-Design-Pattern-things" class="headerlink" title="What are these Design Pattern things ?"></a>What are these Design Pattern things ?</h3><p>Design patterns represent the best practises to solve a particular type of problem, being that by best practises we refer to well documented, well tested and efficient solutions.<br>In fact, when we have a well tested and efficient solution that can be applied and re - applied successfully to a certain kind of problem, we are facing a pattern. This can be applied not only to software, but to many other things in our human world.</p>
+<h3 id="Who-invented-this-stuff"><a href="#Who-invented-this-stuff" class="headerlink" title="Who invented this stuff ?"></a>Who invented this stuff ?</h3><p>Well, the true is that there is no single master mind behind this design patterns, however we can consider the book <strong><em>Elements of reusable object oriented software</em></strong> as the milestone that has established the principles. Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides,the authors of the book, have in fact become so popular that they are referred as the <strong>Gang of Four</strong> or <strong>GOF</strong>. </p>
+<p>So, next time you ear someone talk about the GOF patterns, you know they are talking about the principles presented in those guys book.</p>
+<h3 id="Why-do-I-need-to-learn-them"><a href="#Why-do-I-need-to-learn-them" class="headerlink" title="Why do I need to learn them ?"></a>Why do I need to learn them ?</h3><p>We, as developers, need tools. By tools, here, we do not mean software tools, but knowledge that can allow us to carry out our job in the most efficient manner. </p>
+<p>So, if someone has invented an efficient way to solve a problem, we obviously should use it when we face the same kind of problem (unless, of course, we come up with a better solution).</p>
+<p>Another important aspect of Design Patterns is the fact that they supply us with an abstraction over a problem, allowing for a better communication between software developers.</p>
+<p>If one developer is trying to explain to his colleague all the steps he used to solve a particular problem, it may very well be a lengthy and confusing process. However if can reduce his explanations to something like, I’ve used a <strong><em>Flyweight</em></strong> here and an <strong><em>Observer</em></strong> there, then communication will be vastly improved.</p>
+<p>And that’s why we need to learn them. Because we want to solve our problems in the most efficient ways and we want to be able to communicate with our peers and understand what they are saying.</p>
+<p>Enough thoughts on the subject and let’s move on</p>
+<p>Design patterns usually fall into three categories :</p>
+<ul>
+<li><strong>Creational</strong></li>
+<li><strong>Structural</strong></li>
+<li><strong>Behavioural</strong></li>
+</ul>
+<p><strong><em>Creational patterns</em></strong><br>These are used to create objects for us. This means that instead of creating our own instances, we will request that objects are given to us, in the proper state, when we need them. This gives us an extra layer of flexibility, as the software itself may decide what kind of object to create for a given situation.</p>
+<p><strong><em>Structural patterns</em></strong><br>As the applications grow in complexity, so our objects complexity starts to grow. We will eventually arrive to a point where objects will need to be grouped together to form some complex data structures. Managing those complex data structures manually every time we need them, my become a very complex task. The structural patterns try to abstract away that complexity, so that we can work with complex objects in a easier way.</p>
+<p><strong><em>Behavioural patterns</em></strong><br>These patterns are responsible for the distribution of responsibilities amongst our objects, clearly defining how objects interact with each other,the flow of that communication and ensuring that the objects are loosely coupled. </p>
+<h3 id="So-How-many-patterns-do-exist-out-there"><a href="#So-How-many-patterns-do-exist-out-there" class="headerlink" title="So, How many patterns do exist out there ?"></a>So, How many patterns do exist out there ?</h3><p>In one word , Many. </p>
+<p>In this article we will only name 23, which are those referred in the GOF book, however there are many more. As technology and development languages evolves, new problems appear, and new ways to solve those problems are found. Eventually those new ways become so popular, well documented and tested that they become a design pattern by their own right.</p>
+<p>The patterns mentioned in the GOF book are :</p>
+<ul>
+<li><p><strong>Creational</strong></p>
+<ul>
+<li>Abstract factory</li>
+<li>Builder</li>
+<li>Factory Method</li>
+<li>Prototype</li>
+<li>Singleton</li>
+</ul>
+</li>
+<li><p><strong>Structural</strong></p>
+<ul>
+<li>Adapter</li>
+<li>Bridge</li>
+<li>Composite</li>
+<li>Decorator</li>
+<li>Facade</li>
+<li>Flyweight</li>
+<li>Proxy</li>
+</ul>
+</li>
+<li><p><strong>Behavioural</strong></p>
+<ul>
+<li>Chain of responsibility</li>
+<li>Command</li>
+<li>Interpreter</li>
+<li>Iterator</li>
+<li>Mediator</li>
+<li>Memento</li>
+<li>Observer</li>
+<li>State</li>
+<li>Strategy</li>
+<li>Template method</li>
+<li>Visitor</li>
+</ul>
+</li>
+</ul>
+<p>In my devlog, I will try to explain and document all the above patterns.</p>
+<p>This is an ongoing project that I do in my free time, so stay tuned and comeback from time to time, to check out for new content.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jtmmartins.github.io/2017/11/25/Patterns/" data-id="ck27jptor0005eg7t9es3bgls" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow me:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/josetabordamartins/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/JosManMartins" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/JTMMartins" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/11/26/eager-singleton/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            The eager singleton
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/11/25/Singleton/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Singleton-A little theory</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/30/lambda-expressions-part-six/" class="title">06 - The consumer Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-30T22:29:41.000Z" itemprop="datePublished">2018-04-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-five/" class="title">05 - The Predicate Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T19:12:11.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-four/" class="title">04 - Function Composition</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T10:49:27.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/23/lambda-expressions-part-three/" class="title">03 - The Function Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-23T11:23:43.000Z" itemprop="datePublished">2018-04-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/22/lambda-expressions-part-two/" class="title">02 - The Functional Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-22T14:49:22.000Z" itemprop="datePublished">2018-04-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/">Architecture</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/">Frameworks</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/">Java Language</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/Design-Patterns/" style="font-size: 15px;">Design Patterns</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy;
+                    2019
+                        José Martins
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'josemartins';
+    
+    
+    var disqus_url = 'https://jtmmartins.github.io/2017/11/25/Patterns/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

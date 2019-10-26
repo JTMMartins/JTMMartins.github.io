@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+        <title>
+            
+                Decorator Pattern |
+                    
+                        JoseMartins
+        </title>
+        
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+                
+                    <meta name="keywords" content="Java,Design Patterns" />
+                    
+                        <meta name="description" content="The Decorator allow us to attach additional responsibilities to an object. The concept behind this pattern is not difficult to understand, as long as we have already understood other fundamental conc">
+<meta name="keywords" content="Java,Design Patterns">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Decorator Pattern">
+<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;12&#x2F;01&#x2F;Decorator-Pattern&#x2F;index.html">
+<meta property="og:site_name" content="JoseMartins">
+<meta property="og:description" content="The Decorator allow us to attach additional responsibilities to an object. The concept behind this pattern is not difficult to understand, as long as we have already understood other fundamental conc">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;12&#x2F;01&#x2F;Decorator-Pattern&#x2F;Decorator3.jpg">
+<meta property="og:updated_time" content="2018-04-24T21:51:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;12&#x2F;01&#x2F;Decorator-Pattern&#x2F;Decorator3.jpg">
+                            
+
+                                
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/is_archive/Arimo/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110239987-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Make it correct, make it clear, make it concise, make it fast. In that order.</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/">Architecture</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/">Frameworks</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/">Java Language</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://jtmmartins.github.io/about/index">Resumé</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Decorator-Pattern" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Decorator Pattern
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/01/Decorator-Pattern/" class="article-date">
+            <time datetime="2017-12-01T19:14:46.000Z" itemprop="datePublished">2017-12-01</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="/2017/12/01/Decorator-Pattern/Decorator3.jpg" class="" title="[decorator pattern]">
+<p>The Decorator allow us to attach additional responsibilities to an object. The concept behind this pattern is not difficult to understand, as long as we have already understood other fundamental concepts as inheritance and composition.</p>
+<h3 id="Let’s-start-simple"><a href="#Let’s-start-simple" class="headerlink" title="Let’s start simple"></a>Let’s start simple</h3><p>A decorator is like a shell. In objectland this translates to an object that holds another object inside.</p>
+<p>When we want to <em>“talk”</em> with the inner object, first we <em>“talk”</em> with the outer object, which acts as an intermediary. The outer object will then pass the message to the inner object.</p>
+<p>By using this <em>“middleman”</em> technique, we can intercept the messages that are sent to, or sent by, the inner object. If we can intercept them, it becomes obvious that we can manipulate them according to our needs.</p>
+<h3 id="Can-a-Decorator-decorate-a-Decorator"><a href="#Can-a-Decorator-decorate-a-Decorator" class="headerlink" title="Can a Decorator decorate a Decorator ?"></a>Can a Decorator decorate a Decorator ?</h3><p>It surely can, and that’s when things become interesting.</p>
+<p>An image will help to illustrate,</p>
+<p>Initial situation :</p>
+<img src="/2017/12/01/Decorator-Pattern/decorator1.png" class="" title="[decorator pattern]">
+
+<p>Assembled situation :</p>
+<img src="/2017/12/01/Decorator-Pattern/decorator2.png" class="" title="[decorator pattern]">
+
+<p>In a situation as the one in the image, when we want to reach <strong>object X</strong>, we first need to communicate with object C (decorator C), which will pass the message to object B (decorator B), which will pass the message to object A (decorator A), and finally it will arrive to object X. Any reply from the object X, will follow the inverse path, and along the way we can manipulate the <em>“conversation”</em></p>
+<h3 id="How-do-we-build-this-structure"><a href="#How-do-we-build-this-structure" class="headerlink" title="How do we build this structure ?"></a>How do we build this structure ?</h3><p>To achieve this object structure, we will have to make sure that the object and the decorators are all of the same type. An Interface will help us on that.</p>
+<p>As all the objects are of the same type, we can <em>“communicate”</em> with the outer object as if we where dealing with the most inner object.</p>
+<h3 id="Our-example"><a href="#Our-example" class="headerlink" title="Our example"></a>Our example</h3><p>We’ve just started our internet text messaging company. We provide our users with 3 service plans. A free one, that allows them to send plain text messages, a 1 dollar plan that allows them to send encrypted messages and a 2 dollar plan that will add an extra encryption layer to the messages.</p>
+<p>In our example, the simple encryption is represented by reversing the message, and the extra security layer is represented by codding the reversed message in Base64. This “highly sophisticated encryption” systems :) will be implemented in a class named Enigma.</p>
+<p>This example can illustrate the way we can play with decorators, combining them to achieve different results.</p>
+<p>The UML for our example,</p>
+<img src="/2017/12/01/Decorator-Pattern/DecoratorPattern-Messages.png" class="" title="[click to full size]">
+
+<p>We will implement a <strong><em>Message</em></strong> interface, which will allow us to group our objects under the same type. We will only need one method for this interface that will be <strong><em>sendMessage()</em></strong></p>
+<figure class="highlight java"><figcaption><span>Message.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> DecoratorPattern.ExampleTWO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span></span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Now we will implement the MessageDecorator, as an abstract class. All other decorators will derive from this class by extending it, and the behaviour will be defined in each decorator subclass.</p>
+<figure class="highlight java"><figcaption><span>Message.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> DecoratorPattern.MessageExample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageDecorator</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> Message decoratedMessage;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MessageDecorator</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.decoratedMessage = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Message <span class="title">getDecoratedMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.decoratedMessage;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Next, we will implement our classes. One for each type of message. </p>
+<p>The plain text message <strong><em>StandardMessage Class</em></strong>, will act as the base object ( the one that will be decorated according to our needs). This base class will implement the Message Interface directly.</p>
+<figure class="highlight java"><figcaption><span>StandardMessage.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> DecoratorPattern.MessageExample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StandardMessage</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Messag to send :"</span>);</span><br><span class="line">        System.out.println(message + <span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And now, we implement the decorators which will be the <strong><em>ReversedMessage</em></strong> and <strong><em>EncriptedMessage</em></strong> classes. Both will extend <strong><em>MessageDecorator</em></strong> and by being subclasses, they will have access to parent’s methods.</p>
+<figure class="highlight java"><figcaption><span>ReversedMessage.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> DecoratorPattern.MessageExample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReversedMessage</span> <span class="keyword">extends</span> <span class="title">MessageDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReversedMessage</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        Enigma enigma = <span class="keyword">new</span> Enigma();</span><br><span class="line">        String reversedMessage = enigma.reverser(message);</span><br><span class="line">        <span class="keyword">this</span>.getDecoratedMessage().sendMessage(reversedMessage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>EncriptedMessagejava</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> DecoratorPattern.MessageExample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EncriptedMessage</span> <span class="keyword">extends</span> <span class="title">MessageDecorator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EncriptedMessage</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        Enigma enigma = <span class="keyword">new</span> Enigma();</span><br><span class="line">        String enigmatedMessage = enigma.B64Encode(message);</span><br><span class="line">        <span class="keyword">this</span>.getDecoratedMessage().sendMessage(enigmatedMessage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Finally we implement the Enigma class, which is a helper class that takes care of the our “super secure” encryption system. :)</p>
+<figure class="highlight java"><figcaption><span>EncriptedMessagejava</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> DecoratorPattern.MessageExample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Enigma</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * codes the message in B64</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">B64Encode</span><span class="params">(String messageToEncrypt)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] bytesEncoded = Base64.getEncoder().encode(messageToEncrypt.getBytes();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(bytesEncoded);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Inverts a string</span></span><br><span class="line"><span class="comment">     * abc -&gt; cba</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverser</span><span class="params">(String messageToReverse)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> StringBuilder(messageToReverse).reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Let’s-play"><a href="#Let’s-play" class="headerlink" title="Let’s play"></a>Let’s play</h2><p>With our classes in place, we can now start to play with them and by combining decorators we can achieve interesting results.</p>
+<p>Sending a plain text message is straightforward. All we need to do is to instantiate a new <strong><em>StandardMessage</em></strong> and call the <strong><em>sendMessage</em></strong> method.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String messageToSend = <span class="string">"This is an important message about the decorator pattern"</span>;</span><br><span class="line">Message message = <span class="keyword">new</span> StandardMessage();</span><br><span class="line">message.sendMessage(messageToSend);</span><br></pre></td></tr></table></figure>
+
+<p>When we want to decorate a message, is just a question of instantiating the kind of message we want to send, passing as argument either the base object or another decorator.</p>
+<p>So, if we want to send a Base64 encrypted message ,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String messageToSend = <span class="string">"This is an important message about the decorator pattern"</span>;</span><br><span class="line">Message encodedMessage = <span class="keyword">new</span> EncriptedMessage(<span class="keyword">new</span> StandardMessage());</span><br><span class="line">encodedMessage.sendMessage(messageToSend);</span><br></pre></td></tr></table></figure>
+
+<p>and for a reversed message,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String messageToSend = <span class="string">"This is an important message about the decorator pattern"</span>;</span><br><span class="line">Message reversedMessage = <span class="keyword">new</span> ReversedMessage(<span class="keyword">new</span> StandardMessage());</span><br><span class="line">reversedMessage.sendMessage(messageToSend);</span><br></pre></td></tr></table></figure>
+
+<p>In this case we can play even further. If we want to send an Base64 encrypted reversed message, we can instantiate an <strong><em>EncriptedMessage</em></strong> passing as argument a <strong><em>ReversedMessage</em></strong> with a <strong><em>StandardMessage</em></strong> as argument.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String messageToSend = <span class="string">"This is an important message about the decorator pattern"</span>;</span><br><span class="line">Message encodedAndReversedMessage = <span class="keyword">new</span> EncriptedMessage(<span class="keyword">new</span> ReversedMessage(<span class="keyword">new</span> StandardMessage()));</span><br><span class="line">encodedAndReversedMessage.sendMessage(messageToSend);</span><br></pre></td></tr></table></figure>
+
+<p>We can do another combination, reversing the message first and Base64 encoding it next, and that would become,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String messageToSend = <span class="string">"This is an important message about the decorator pattern"</span>;</span><br><span class="line">Message reversedAndEncoded = <span class="keyword">new</span> ReversedMessage(<span class="keyword">new</span> EncriptedMessage(<span class="keyword">new</span> StandardMessage()));</span><br><span class="line">reversedAndEncoded.sendMessage(messageToSend);</span><br></pre></td></tr></table></figure>
+
+<p>We can even be crazy enough to double reverse a message, although that is useless, as we will get the initial message, but in an experiment there is nothing like being crazy,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String messageToSend = <span class="string">"This is an important message about the decorator pattern"</span>;</span><br><span class="line">Message doubleReversed = <span class="keyword">new</span> ReversedMessage(<span class="keyword">new</span> ReversedMessage(<span class="keyword">new</span> StandardMessage()));</span><br><span class="line">doubleReversed.sendMessage(messageToSend);</span><br></pre></td></tr></table></figure>
+
+<p>And this are the basics of the Decorator pattern. A very interesting alternative to sub-classing, that allow us to combine things in very creative ways.</p>
+<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" title="" target="">git-hub</a></p>
+<p>Happy coding.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jtmmartins.github.io/2017/12/01/Decorator-Pattern/" data-id="ck27jptoh0000eg7t4vmv8oxv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow me:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/josetabordamartins/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/JosManMartins" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/JTMMartins" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/12/09/Hibernate-Auto-import-Sample-Data/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Hibernate - Auto-import Sample Data
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/11/28/Simple-Factory/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Introduction to factories</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/30/lambda-expressions-part-six/" class="title">06 - The consumer Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-30T22:29:41.000Z" itemprop="datePublished">2018-04-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-five/" class="title">05 - The Predicate Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T19:12:11.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-four/" class="title">04 - Function Composition</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T10:49:27.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/23/lambda-expressions-part-three/" class="title">03 - The Function Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-23T11:23:43.000Z" itemprop="datePublished">2018-04-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/22/lambda-expressions-part-two/" class="title">02 - The Functional Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-22T14:49:22.000Z" itemprop="datePublished">2018-04-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/">Architecture</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/">Frameworks</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/">Java Language</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/Design-Patterns/" style="font-size: 15px;">Design Patterns</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy;
+                    2019
+                        José Martins
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'josemartins';
+    
+    
+    var disqus_url = 'https://jtmmartins.github.io/2017/12/01/Decorator-Pattern/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

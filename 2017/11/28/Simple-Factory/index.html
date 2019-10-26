@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+        <title>
+            
+                Introduction to factories |
+                    
+                        JoseMartins
+        </title>
+        
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+                
+                    <meta name="keywords" content="Java,Design Patterns" />
+                    
+                        <meta name="description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementa">
+<meta name="keywords" content="Java,Design Patterns">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to factories">
+<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Simple-Factory&#x2F;index.html">
+<meta property="og:site_name" content="JoseMartins">
+<meta property="og:description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementa">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Simple-Factory&#x2F;simpleFactory1.png">
+<meta property="og:updated_time" content="2017-12-09T19:20:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Simple-Factory&#x2F;simpleFactory1.png">
+                            
+
+                                
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/is_archive/Arimo/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110239987-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Make it correct, make it clear, make it concise, make it fast. In that order.</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/">Architecture</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/">Frameworks</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/">Java Language</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://jtmmartins.github.io/about/index">Resumé</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Simple-Factory" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Introduction to factories
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/11/28/Simple-Factory/" class="article-date">
+            <time datetime="2017-11-28T22:32:43.000Z" itemprop="datePublished">2017-11-28</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="/2017/11/28/Simple-Factory/simpleFactory1.png" class="" title="[A simple factory]">
+<p>This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementation, and it does not intends to be, however due to it’s simplicity it will help us to illustrate the idea. More complex factories will be discussed in other posts.</p>
+<h3 id="So-why-factories"><a href="#So-why-factories" class="headerlink" title="So, why factories ?"></a>So, why factories ?</h3><p>The factory pattern is used when we need to create an object but we will only know what kind of object to create during run time.</p>
+<p>There are different ways to implement factories, and the option to choose one of them depends on the problem we want to solve, but they all share the same advantages :</p>
+<ul>
+<li>Hiding the implementation logic behind object creation.</li>
+<li>All implementation logic is removed from the client code.</li>
+<li>we can change the logic of an object creation without touching the client code.</li>
+<li>we code for interface rather than implementation.</li>
+</ul>
+<p>The above advantages make our code less coupled and easier to maintain.</p>
+<h3 id="What-is-the-main-idea"><a href="#What-is-the-main-idea" class="headerlink" title="What is the main idea ?"></a>What is the main idea ?</h3><p>In the real world, a factory produces goods according to market needs. Here, we are in objectland, so a factory will produce objects according to our requests, which may vary during the application run-time.</p>
+<p>To illustrate our example we will try to solve the following problem :</p>
+<p>Our application needs to implement a system that will send messages to our company customers, however we want to be able to send three different type of messages, Email, SMS and Fax (OK, I agree fax is old stuff, but we will use it anyway).</p>
+<p>Depending on some kind of input, that we will only know at run-time, our application has to be able to decide which kind of message to send.</p>
+<h3 id="Examining-our-problem"><a href="#Examining-our-problem" class="headerlink" title="Examining our problem"></a>Examining our problem</h3><p>The very first impulse, for a non object oriented mind will be a bunch of <em>if</em> statements, based on that input, and job done. After all, its only 3 different type of messages !!</p>
+<p>What if…</p>
+<p>Next week we need to implement two more type of messages ? We will need to change all our code, and we will be facing, what I like to call an <em>if farm</em>, and we are half way to spaghetti code paradise. So, it does not look a very good idea.</p>
+<p>This is the kind of problem that the factory pattern proposes to solve.</p>
+<h3 id="A-better-approach"><a href="#A-better-approach" class="headerlink" title="A better approach"></a>A better approach</h3><p>If we look with an object oriented mind to the problem, we will spot a common element. They are all messages, only the way they are sent varies. Grouping them in a message interface seems a good starting point.</p>
+<p>Knowing that, we can then implement an <strong><em>message</em></strong> interface, with the single method <strong><em>SendMessage</em></strong>.</p>
+<p>Next we will write a class for each type of message, that will implement the <strong><em>message</em></strong> interface. In each of those classes we will then proceed with the actual implementation of the <strong><em>SendMessage</em></strong> method  </p>
+<p>In UML our very simple factory will look like this</p>
+<img src="/2017/11/28/Simple-Factory/FactoryPattern1.png" class="" title="[Simple factory UML]">
+
+<h3 id="Coding-the-UML-visualization"><a href="#Coding-the-UML-visualization" class="headerlink" title="Coding the UML visualization"></a>Coding the UML visualization</h3><p>The Message interface</p>
+<figure class="highlight java"><figcaption><span>Message.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The three message classes </p>
+<figure class="highlight java"><figcaption><span>Email.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Email</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an Email with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>SMS.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SMS</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an SMS with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>Fax.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fax</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an FAX with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In our UML diagram, we have the <strong><em>MessageType</em></strong> Enumerator. We will use it in our client code to select the type of message we want to send. We could pass Strings, but that would increase the possibility of typing errors, so the Enum, is safer.</p>
+<figure class="highlight java"><figcaption><span>MessageType.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> MessageType &#123;</span><br><span class="line">    FaxMessage,</span><br><span class="line">    SMSMessage,</span><br><span class="line">    EmailMessage</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We now have the building blocks of our factory. The way I will use in this example to illustrate the factory implementation, is a very simple approach, but my intention is to introduce the concept of what a factory does, and in my humble opinion this makes the concept easier to understand. When we discuss more complex implementations it will be simpler to understand what is happening.</p>
+<figure class="highlight java"><figcaption><span>MessageFactory.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Message <span class="title">construct</span><span class="params">(MessageType type)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> SMSMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> SMS();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> EmailMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Email();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> FaxMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Fax();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"Invalid Message Type"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>With the interface and classes in place, we can now very easily receive the object we want to send our messages. A very simple app will do to try it out.</p>
+<figure class="highlight java"><figcaption><span>App.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String messageText = <span class="string">" This is a message from our company. Many thanks"</span>;</span><br><span class="line">        </span><br><span class="line">        MessageType type = MessageType.SMSMessage;</span><br><span class="line">        Message messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        type = MessageType.EmailMessage;</span><br><span class="line">        messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line"></span><br><span class="line">        type = MessageType.FaxMessage;</span><br><span class="line">        messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>I believe this is will help to grasp the concept behind factories, and when we discuss more complex types of factories everything will look much easier.</p>
+<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" title="" target="">git-hub</a></p>
+<p>Happy Coding.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jtmmartins.github.io/2017/11/28/Simple-Factory/" data-id="ck27jptou0009eg7tglhogm2s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow me:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/josetabordamartins/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/JosManMartins" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/JTMMartins" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/12/01/Decorator-Pattern/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Decorator Pattern
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/11/28/Builder-Pattern/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">The builder Pattern, make it semantic</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/30/lambda-expressions-part-six/" class="title">06 - The consumer Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-30T22:29:41.000Z" itemprop="datePublished">2018-04-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-five/" class="title">05 - The Predicate Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T19:12:11.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-four/" class="title">04 - Function Composition</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T10:49:27.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/23/lambda-expressions-part-three/" class="title">03 - The Function Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-23T11:23:43.000Z" itemprop="datePublished">2018-04-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/22/lambda-expressions-part-two/" class="title">02 - The Functional Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-22T14:49:22.000Z" itemprop="datePublished">2018-04-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/">Architecture</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/">Frameworks</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/">Java Language</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/Design-Patterns/" style="font-size: 15px;">Design Patterns</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy;
+                    2019
+                        José Martins
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'josemartins';
+    
+    
+    var disqus_url = 'https://jtmmartins.github.io/2017/11/28/Simple-Factory/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

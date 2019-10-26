@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+        <title>
+            
+                The builder Pattern, make it semantic |
+                    
+                        JoseMartins
+        </title>
+        
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+                
+                    <meta name="keywords" content="Java,Design Patterns" />
+                    
+                        <meta name="description" content="The purpose of the builder pattern is to simplify the construction of complex objects, providing us a method to create different representations by using the same construction process. It’s not unco">
+<meta name="keywords" content="Java,Design Patterns">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The builder Pattern, make it semantic">
+<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Builder-Pattern&#x2F;index.html">
+<meta property="og:site_name" content="JoseMartins">
+<meta property="og:description" content="The purpose of the builder pattern is to simplify the construction of complex objects, providing us a method to create different representations by using the same construction process. It’s not unco">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Builder-Pattern&#x2F;builderPattern.png">
+<meta property="og:updated_time" content="2017-12-09T23:10:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Builder-Pattern&#x2F;builderPattern.png">
+                            
+
+                                
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/is_archive/Arimo/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-110239987-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Make it correct, make it clear, make it concise, make it fast. In that order.</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/">Architecture</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/">Frameworks</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/">Java Language</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://jtmmartins.github.io/about/index">Resumé</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Builder-Pattern" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        The builder Pattern, make it semantic
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/11/28/Builder-Pattern/" class="article-date">
+            <time datetime="2017-11-28T11:47:37.000Z" itemprop="datePublished">2017-11-28</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="/2017/11/28/Builder-Pattern/builderPattern.png" class="" title="[builder pattern]">
+
+<p>The purpose of the builder pattern is to simplify the construction of complex objects, providing us a method to create different representations by using the same construction process.</p>
+<p>It’s not uncommon to create objects that need to receive lots of arguments to be properly initialized and in a usable state.</p>
+<p>There are at least two ways to achieve this. We can Use a parametrized constructor or we can use setters.</p>
+<p>Let’s see the problems that can arise from this “standard” way to do things.</p>
+<h4 id="The-constructor-problem"><a href="#The-constructor-problem" class="headerlink" title="The constructor problem"></a>The constructor problem</h4><p>let’s imagine you are examining some code and come across a line like,</p>
+<p><code>Window window = new Window (100,100,200,300,&quot;settings&quot;,35,127,32)</code></p>
+<p>What information do you get from there ? What are all those values for ?</p>
+<p>We don’t know, so, although the IDE may help a little here, we normally end up visiting the Window class, just to make sure. It may be simple, and surely works, but the true is that an extra layer of complexity was inserted in this code, as it is not easily understandable. </p>
+<h4 id="The-setter’s-problem"><a href="#The-setter’s-problem" class="headerlink" title="The setter’s problem"></a>The setter’s problem</h4><p>Although using setters will overcome the problem of us not knowing what the values refer to, there is a severe hidden problem.</p>
+<p>To access the setters, we first need to instantiate the object, and that means that the object already exists somewhere in the <em>heap</em>, but until we have all the setters “properly setted”, the object is in an inconsistent state. Using it, before it is fully formed, may lead to unpredictable results. In some applications, this is a disaster waiting to happen.</p>
+<p>There must be a better way, and that’s where the builder pattern comes in.</p>
+<p>The idea is to <em>build</em> our object, step by step, and in the end we will receive the object fully formed. </p>
+<p>The steps we will use will be,</p>
+<ol>
+<li>Create a class that represents our object with all the needed attributes.</li>
+<li>Create a <em>static inner class</em> an in this inner class we copy all the attributes of the <em>outer class</em>. Convention dictates that the inner class should be named as the outer class with the suffix <em>builder</em>.</li>
+<li>The builder class should have a <em>public constructor</em> with all attributes as parameters.</li>
+<li>In the inner class we should make available a <em>public method</em> named builder (again, this name is a convention) that will return our object. To properly achieve this we will use a private constructor in the outer class that will receive as argument it’s inner class.</li>
+</ol>
+<p>NOTE : we may have more than one <em>builder</em> class, each one with different steps to create the object.</p>
+<p>Here we are using the fact that in Java, a static inner class acts as a static member of the outer class, and it can be accessed without instantiating the outter class.</p>
+<p>After implementing a builder, the line we showed above as, </p>
+<p><code>Window window = new Window (100,100,200,300,&quot;settings&quot;,35,127,32)</code></p>
+<p>will become</p>
+<pre><code>`Window window = new Window.WindowBuilder()
+                    .withLeftTopcornerPositionX(100)
+                    .withLeftTopCornerPositionY(100)
+                    .withHeight(300)
+                    .withWidth(600)
+                    .fillWithRGB(125,180,28)
+                    .withTitle(&quot;Settings&quot;)
+                    .build();`</code></pre><p>Now, besides coding, we are actually communicating in an elegant way. Anyone that comes across this code, will easily understand what it does.</p>
+<p>So, let’s see the implementation,</p>
+<figure class="highlight java"><figcaption><span>Window.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> BuilderPattern;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Window</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> topCornerX;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> topCornerY;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> windowWidth;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> windowHeight;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> fillRedValue;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> fillGreenValue;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> fillBlueValue;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String windowTitle;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// begin of inner class</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">WindowBuilder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> topCornerX; <span class="comment">//if nothing is said, default value will be zero</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> topCornerY; <span class="comment">//if nothing is said, default value will be zero</span></span><br><span class="line">        <span class="comment">// if no values are send to builder, this will be the default values</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> windowWidth = <span class="number">300</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> windowHeight = <span class="number">300</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> fillRedValue = <span class="number">255</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> fillGreenValue = <span class="number">255</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> fillBlueValue = <span class="number">255</span>;</span><br><span class="line">        <span class="keyword">private</span> String windowTitle = <span class="string">"untitled"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> WindowBuilder <span class="title">withLeftTopcornerPositionX</span><span class="params">(<span class="keyword">int</span> topCornerX)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//we don't want our X coordinates out of this range</span></span><br><span class="line">            <span class="keyword">if</span> (isWithinRange(topCornerX, <span class="number">0</span>, <span class="number">1024</span>)) &#123;</span><br><span class="line">                topCornerX = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.topCornerX = topCornerX;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> WindowBuilder <span class="title">withLeftTopCornerPositionY</span><span class="params">(<span class="keyword">int</span> topCornerY)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//we don't want our Y coordinates out of this range</span></span><br><span class="line">            <span class="keyword">if</span> (isWithinRange(topCornerY, <span class="number">0</span>, <span class="number">800</span>)) &#123;</span><br><span class="line">                topCornerY = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.topCornerY = topCornerY;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> WindowBuilder <span class="title">withWidth</span><span class="params">(<span class="keyword">int</span> windowWidth)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//we don't want our width out of this range</span></span><br><span class="line">            <span class="keyword">if</span> (isWithinRange(windowWidth, <span class="number">1</span>, <span class="number">600</span>)) &#123;</span><br><span class="line">                windowWidth = <span class="number">300</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.windowWidth = windowWidth;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> WindowBuilder <span class="title">withHeight</span><span class="params">(<span class="keyword">int</span> windowHeight)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//we don't want our height out of this range</span></span><br><span class="line">            <span class="keyword">if</span> (isWithinRange(windowHeight, <span class="number">1</span>, <span class="number">600</span>)) &#123;</span><br><span class="line">                windowHeight = <span class="number">300</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.windowHeight = windowHeight;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> WindowBuilder <span class="title">fillWithRGB</span><span class="params">(<span class="keyword">int</span> red, <span class="keyword">int</span> green, <span class="keyword">int</span> blue)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//we don't want any of the RGB values out of the range (0-255)</span></span><br><span class="line">            <span class="keyword">if</span> ((isWithinRange(red, <span class="number">0</span>, <span class="number">255</span>) | (isWithinRange(green, <span class="number">0</span>, <span class="number">255</span>)) | (isWithinRange(blue, <span class="number">0</span>, <span class="number">255</span>)))) &#123;</span><br><span class="line"></span><br><span class="line">                red = <span class="number">255</span>;</span><br><span class="line">                green = <span class="number">255</span>;</span><br><span class="line">                blue = <span class="number">255</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.fillRedValue = red;</span><br><span class="line">            <span class="keyword">this</span>.fillGreenValue = green;</span><br><span class="line">            <span class="keyword">this</span>.fillBlueValue = blue;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> WindowBuilder <span class="title">withTitle</span><span class="params">(String title)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (title != <span class="keyword">null</span> &amp;&amp; !title.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">                <span class="keyword">this</span>.windowTitle = title;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.windowTitle = <span class="string">" untitled "</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Window <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Window(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * verifies if a value is out of accepted range</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isWithinRange</span><span class="params">(<span class="keyword">int</span> value, <span class="keyword">int</span> min, <span class="keyword">int</span> max)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (value &lt; min || value &gt; max);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;<span class="comment">// end of inner class</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Window</span><span class="params">(WindowBuilder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.topCornerX = builder.topCornerX;</span><br><span class="line">        <span class="keyword">this</span>.topCornerY = builder.topCornerY;</span><br><span class="line">        <span class="keyword">this</span>.windowHeight = builder.windowHeight;</span><br><span class="line">        <span class="keyword">this</span>.windowWidth = builder.windowWidth;</span><br><span class="line">        <span class="keyword">this</span>.fillRedValue = builder.fillRedValue;</span><br><span class="line">        <span class="keyword">this</span>.fillGreenValue = builder.fillGreenValue;</span><br><span class="line">        <span class="keyword">this</span>.fillBlueValue = builder.fillBlueValue;</span><br><span class="line">        <span class="keyword">this</span>.windowTitle = builder.windowTitle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"I'm creating a window with a name "</span> + windowTitle + <span class="string">" top left X corner = "</span> + topCornerX + <span class="string">" top left Y corner = "</span> + topCornerY + <span class="string">" with a width of "</span> + windowWidth + <span class="string">" and height of "</span> + windowHeight +</span><br><span class="line">                <span class="string">" I will fill the window with the color ("</span> + fillRedValue + <span class="string">","</span> + fillGreenValue + <span class="string">","</span> + fillBlueValue + <span class="string">")"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTopCornerX</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> topCornerX;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTopCornerY</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> topCornerY;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getWindowWidth</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> windowWidth;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getWindowHeight</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> windowHeight;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getFillRedValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fillRedValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getFillGreenValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fillGreenValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getFillBlueValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fillBlueValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getWindowTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> windowTitle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Now, that may seems a lot of work, but trust me, it will pay off in the long run.</p>
+<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" title="" target="">git-hub</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jtmmartins.github.io/2017/11/28/Builder-Pattern/" data-id="ck27jptol0001eg7tf68412ks" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow me:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/josetabordamartins/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="https://twitter.com/JosManMartins" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/JTMMartins" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/11/28/Simple-Factory/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Introduction to factories
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/11/26/enum-singleton/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Hi there, I&#39;m the Enum singleton</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/30/lambda-expressions-part-six/" class="title">06 - The consumer Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-30T22:29:41.000Z" itemprop="datePublished">2018-04-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-five/" class="title">05 - The Predicate Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T19:12:11.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/25/lambda-expressions-part-four/" class="title">04 - Function Composition</a></p>
+                            <p class="item-date"><time datetime="2018-04-25T10:49:27.000Z" itemprop="datePublished">2018-04-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/23/lambda-expressions-part-three/" class="title">03 - The Function Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-23T11:23:43.000Z" itemprop="datePublished">2018-04-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a></p>
+                            <p class="item-title"><a href="/2018/04/22/lambda-expressions-part-two/" class="title">02 - The Functional Interface</a></p>
+                            <p class="item-date"><time datetime="2018-04-22T14:49:22.000Z" itemprop="datePublished">2018-04-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/">Architecture</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/">Frameworks</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Frameworks/Hibernate/">Hibernate</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/">Java Language</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Architecture/" style="font-size: 10px;">Architecture</a> <a href="/tags/Design-Patterns/" style="font-size: 15px;">Design Patterns</a> <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy;
+                    2019
+                        José Martins
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'josemartins';
+    
+    
+    var disqus_url = 'https://jtmmartins.github.io/2017/11/28/Builder-Pattern/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
