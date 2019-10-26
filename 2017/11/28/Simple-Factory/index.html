@@ -15,18 +15,20 @@
                 
                     <meta name="keywords" content="Java,Design Patterns" />
                     
-                        <meta name="description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementa">
+                        <meta name="description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s">
 <meta name="keywords" content="Java,Design Patterns">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Introduction to factories">
-<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Simple-Factory&#x2F;index.html">
+<meta property="og:url" content="https://jtmmartins.github.io/2017/11/28/Simple-Factory/index.html">
 <meta property="og:site_name" content="JoseMartins">
 <meta property="og:description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementa">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Simple-Factory&#x2F;simpleFactory1.png">
+<meta property="og:image" content="https://jtmmartins.github.io/2017/11/28/Simple-Factory/simpleFactory1.png">
 <meta property="og:updated_time" content="2017-12-09T19:20:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;28&#x2F;Simple-Factory&#x2F;simpleFactory1.png">
+<meta name="twitter:title" content="Introduction to factories">
+<meta name="twitter:description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementa">
+<meta name="twitter:image" content="https://jtmmartins.github.io/2017/11/28/Simple-Factory/simpleFactory1.png">
                             
 
                                 
@@ -176,14 +178,14 @@ ga('send', 'pageview');
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>
+        <a class="tag-link" href="/tags/Design-Patterns/">Design Patterns</a>, <a class="tag-link" href="/tags/Java/">Java</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <img src="/2017/11/28/Simple-Factory/simpleFactory1.png" class="" title="[A simple factory]">
+            <img src="/2017/11/28/Simple-Factory/simpleFactory1.png" title="[A simple factory]">
 <p>This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementation, and it does not intends to be, however due to it’s simplicity it will help us to illustrate the idea. More complex factories will be discussed in other posts.</p>
 <h3 id="So-why-factories"><a href="#So-why-factories" class="headerlink" title="So, why factories ?"></a>So, why factories ?</h3><p>The factory pattern is used when we need to create an object but we will only know what kind of object to create during run time.</p>
 <p>There are different ways to implement factories, and the option to choose one of them depends on the problem we want to solve, but they all share the same advantages :</p>
@@ -198,7 +200,7 @@ ga('send', 'pageview');
 <p>To illustrate our example we will try to solve the following problem :</p>
 <p>Our application needs to implement a system that will send messages to our company customers, however we want to be able to send three different type of messages, Email, SMS and Fax (OK, I agree fax is old stuff, but we will use it anyway).</p>
 <p>Depending on some kind of input, that we will only know at run-time, our application has to be able to decide which kind of message to send.</p>
-<h3 id="Examining-our-problem"><a href="#Examining-our-problem" class="headerlink" title="Examining our problem"></a>Examining our problem</h3><p>The very first impulse, for a non object oriented mind will be a bunch of <em>if</em> statements, based on that input, and job done. After all, its only 3 different type of messages !!</p>
+<h3 id="Examining-our-problem"><a href="#Examining-our-problem" class="headerlink" title="Examining our problem"></a>Examining our problem</h3><p>The very first impulse, for a non object oriented mind will be a bunch of _if_ statements, based on that input, and job done. After all, its only 3 different type of messages !!</p>
 <p>What if…</p>
 <p>Next week we need to implement two more type of messages ? We will need to change all our code, and we will be facing, what I like to call an <em>if farm</em>, and we are half way to spaghetti code paradise. So, it does not look a very good idea.</p>
 <p>This is the kind of problem that the factory pattern proposes to solve.</p>
@@ -206,29 +208,21 @@ ga('send', 'pageview');
 <p>Knowing that, we can then implement an <strong><em>message</em></strong> interface, with the single method <strong><em>SendMessage</em></strong>.</p>
 <p>Next we will write a class for each type of message, that will implement the <strong><em>message</em></strong> interface. In each of those classes we will then proceed with the actual implementation of the <strong><em>SendMessage</em></strong> method  </p>
 <p>In UML our very simple factory will look like this</p>
-<img src="/2017/11/28/Simple-Factory/FactoryPattern1.png" class="" title="[Simple factory UML]">
-
+<img src="/2017/11/28/Simple-Factory/FactoryPattern1.png" title="[Simple factory UML]">
 <h3 id="Coding-the-UML-visualization"><a href="#Coding-the-UML-visualization" class="headerlink" title="Coding the UML visualization"></a>Coding the UML visualization</h3><p>The Message interface</p>
 <figure class="highlight java"><figcaption><span>Message.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>The three message classes </p>
 <figure class="highlight java"><figcaption><span>Email.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Email</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an Email with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight java"><figcaption><span>SMS.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SMS</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an SMS with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight java"><figcaption><span>Fax.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fax</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an FAX with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>In our UML diagram, we have the <strong><em>MessageType</em></strong> Enumerator. We will use it in our client code to select the type of message we want to send. We could pass Strings, but that would increase the possibility of typing errors, so the Enum, is safer.</p>
 <figure class="highlight java"><figcaption><span>MessageType.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> MessageType &#123;</span><br><span class="line">    FaxMessage,</span><br><span class="line">    SMSMessage,</span><br><span class="line">    EmailMessage</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>We now have the building blocks of our factory. The way I will use in this example to illustrate the factory implementation, is a very simple approach, but my intention is to introduce the concept of what a factory does, and in my humble opinion this makes the concept easier to understand. When we discuss more complex implementations it will be simpler to understand what is happening.</p>
 <figure class="highlight java"><figcaption><span>MessageFactory.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Message <span class="title">construct</span><span class="params">(MessageType type)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> SMSMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> SMS();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> EmailMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Email();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> FaxMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Fax();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"Invalid Message Type"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>With the interface and classes in place, we can now very easily receive the object we want to send our messages. A very simple app will do to try it out.</p>
 <figure class="highlight java"><figcaption><span>App.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String messageText = <span class="string">" This is a message from our company. Many thanks"</span>;</span><br><span class="line">        </span><br><span class="line">        MessageType type = MessageType.SMSMessage;</span><br><span class="line">        Message messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        type = MessageType.EmailMessage;</span><br><span class="line">        messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line"></span><br><span class="line">        type = MessageType.FaxMessage;</span><br><span class="line">        messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>I believe this is will help to grasp the concept behind factories, and when we discuss more complex types of factories everything will look much easier.</p>
-<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" title="" target="">git-hub</a></p>
+<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" target="_blank" rel="noopener">git-hub</a></p>
 <p>Happy Coding.</p>
 
         </div>
@@ -237,7 +231,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2017/11/28/Simple-Factory/" data-id="ck27jptou0009eg7tglhogm2s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2017/11/28/Simple-Factory/" data-id="ck27kcxqo0006nv7tgip47gx4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -453,7 +447,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">14</span></li></ul>
         </div>
     </div>
 
@@ -490,7 +484,7 @@ ga('send', 'pageview');
         <footer id="footer">
     <div class="container">
         <div class="container-inner">
-            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
                 <h1 class="logo-wrap">
                     <a href="/" class="logo"></a>

@@ -15,18 +15,20 @@
                 
                     <meta name="keywords" content="Java" />
                     
-                        <meta name="description" content="In the first post of this easy introductory series we have introduced the basic foundations of how to form a lambda expression.It’s now time to learn how we can use them.">
+                        <meta name="description" content="In the first post of this easy introductory series we have introduced the basic foundations of how to form a lambda expression.It’s now time to learn how we can">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="02 - The Functional Interface">
-<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2018&#x2F;04&#x2F;22&#x2F;lambda-expressions-part-two&#x2F;index.html">
+<meta property="og:url" content="https://jtmmartins.github.io/2018/04/22/lambda-expressions-part-two/index.html">
 <meta property="og:site_name" content="JoseMartins">
 <meta property="og:description" content="In the first post of this easy introductory series we have introduced the basic foundations of how to form a lambda expression.It’s now time to learn how we can use them.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2018&#x2F;04&#x2F;22&#x2F;lambda-expressions-part-two&#x2F;lambdas-2.png">
+<meta property="og:image" content="https://jtmmartins.github.io/2018/04/22/lambda-expressions-part-two/lambdas-2.png">
 <meta property="og:updated_time" content="2018-04-25T10:24:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2018&#x2F;04&#x2F;22&#x2F;lambda-expressions-part-two&#x2F;lambdas-2.png">
+<meta name="twitter:title" content="02 - The Functional Interface">
+<meta name="twitter:description" content="In the first post of this easy introductory series we have introduced the basic foundations of how to form a lambda expression.It’s now time to learn how we can use them.">
+<meta name="twitter:image" content="https://jtmmartins.github.io/2018/04/22/lambda-expressions-part-two/lambdas-2.png">
                             
 
                                 
@@ -176,18 +178,16 @@ ga('send', 'pageview');
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>
+        <a class="tag-link" href="/tags/Java/">Java</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <img src="/2018/04/22/lambda-expressions-part-two/lambdas-2.png" class="">
-
+            <img src="/2018/04/22/lambda-expressions-part-two/lambdas-2.png">
 <p>In the first post of this easy introductory series we have introduced the basic foundations of how to form a lambda expression.It’s now time to learn how we can use them.</p>
 <a id="more"></a>
-
 <p>We have already learned that the basic idea behind lambda expressions is to assign a block of code to a variable.<br>As a variable can be passed, as an argument, to methods, this means that we can pass a block of code around, which will lead to the ultimate goal - passing behaviours around our application, without the need to create extra classes.</p>
 <p>Remember, functions live in isolation and they are entities in their own right.</p>
 <p>We finished the previous <a href="/2018/04/21/lambda-expressions-part-one/" title="post">post</a> by showing this piece of code,</p>
@@ -196,38 +196,32 @@ ga('send', 'pageview');
 	<center>
 	<b>
 	gentsSalutation= () -> System.out.println(“Hello dear sir”);
-           </center>
-		    </b>
+           </b></center>
+		    
 			</font>
-
 
 <p>and asking ourselves <strong>“What is the type of the gentsSalutation variable ?”</strong>, because as we know Java is a strong typed language, so all variables need to be assigned a type.</p>
 <h3 id="The-Functional-Interface"><a href="#The-Functional-Interface" class="headerlink" title="The Functional Interface"></a>The Functional Interface</h3><p>Java 8 brought us the concept of Functional Interfaces.</p>
 <p>By definition, <strong>“A Functional Interface is an Interface that contains one abstract method (a method with no implementation).</strong><sup>there is an exception, mentioned below in the post</sup></p>
-<p>The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html" title="[external] [Java 8 documentation]" target="">java.util.function Java 8 documentation</a>, also states <strong>“Functional Interfaces provide target types for lambda expressions and method references”.</strong></p>
+<p>The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html" title="[external] [Java 8 documentation]" target="_blank" rel="noopener">java.util.function Java 8 documentation</a>, also states <strong>“Functional Interfaces provide target types for lambda expressions and method references”.</strong></p>
 <p>By combining the above, we can then say that <strong>a functional interface is an interface with only one abstract method that provides a target type for lambda expressions.</strong></p>
 <p>I will take the example from the previous <a href="/2018/04/21/lambda-expressions-part-one/" title="post">post</a>. We can see that  an interface named <em>salutation</em> is already in place.</p>
 <figure class="highlight java"><figcaption><span>Salutation.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Salutation</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>We have an Interface, which has only one method, and that method has no implementation, so it is abstract. It looks like we have a perfect candidate for the above definition and, as so, we are in the presence of a Functional Interface.</p>
 <p>So, if a Functional Interface can be a target type for a lambda expression, what will happen if we assign the <em>Salutation</em> type to our <em>gentsSalutation</em> variable ?</p>
 <p>Let’s fetch part of the the code we need from the previous <a href="/2018/04/21/lambda-expressions-part-one/" title="post">post</a></p>
 <p>the Interface,</p>
 <figure class="highlight java"><figcaption><span>Salutation.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Salutation</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>the Service,</p>
 <figure class="highlight java"><figcaption><span>SalutationService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SalutationService</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">salute</span><span class="params">(Salutation salutation )</span> </span>&#123;</span><br><span class="line">		salutation.perform();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>We also had the App class, but we will now change it to include our <em>gentsSalutation</em> variable as being of type <em>Salutation</em></p>
 <figure class="highlight java"><figcaption><span>App.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		SalutationService salutationService=<span class="keyword">new</span> SalutationService();</span><br><span class="line">		Salutation gentsSalutation=()-&gt;System.out.println(<span class="string">"Hello dear sir"</span>);</span><br><span class="line">		Salutation ladiesSalutation=()-&gt;System.out.println(<span class="string">"Hello dear Madam"</span>);</span><br><span class="line">		salutationService.salute(gentsSalutation);</span><br><span class="line">		salutationService.salute(ladiesSalutation);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>The <em>salute</em> method of the <em>SalutationService</em>, was already accepting a <em>Salutation</em> object, and now our <em>gentsSalutation</em> variable has been assigned that same type, therefore it becomes possible to pass it as an argument to the method.</p>
 <p>When run, this code works perfectly and we get the same result as before, but now we are using the lambda expression.</p>
 <p>So, what happened here ?</p>
 <p>We got rid of the <em>GentsSalutation</em> and the <em>Ladiessalutation</em> classes. We created two expressions (function - which executes an action) and assigned them to the variables <em>getsSalutation</em> and <em>ladiesSalutation</em>. As variables can be passed around, we passed those variables to the service and there, the code was executed when we called .perform() on it.</p>
 <p>To clarify, let’s see what happens if we change our app class in a way that we do not use the service class,</p>
 <figure class="highlight java"><figcaption><span>App.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		Salutation gentsSalutation=()-&gt;System.out.println(<span class="string">"Hello dear sir"</span>);</span><br><span class="line">		gentsSalutation.perform();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>When run, this code does exactly the same. </p>
 <p>So we can conclude that the lambda expression is actually acting as if it was an implementation of the interface and we could drop the <em>SalutationService</em> class if we wanted (although in my opinion, the presence of the service class makes things easier to understand).</p>
 <p>This is the reason why a Functional Interface can only have one abstract method <sup>see exception bellow</sup>. If you had more than one, then the compiler would not know which one would be related to the lambda expression.</p>
@@ -235,11 +229,9 @@ ga('send', 'pageview');
 <p>It is not mandatory to use the annotation, however is good practice to do so, as it makes clear the nature of the interface. Also if someone changes the code in a way that it becomes a non functional interface, the compiler will immediately complaint about it, pointing us that the interface is not Functional.</p>
 <p>As we like to follow good practises, we change our interface to,</p>
 <figure class="highlight java"><figcaption><span>Salutation.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Salutation</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>Earlier we wrote <strong>“a functional interface is an interface with only one abstract method that provides a target type for lambda expressions”.</strong></p>
 <p><sup>Important</sup>However there is an exception. If we change our Salutation interface to,</p>
 <figure class="highlight java"><figcaption><span>Salutation.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Salutation</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>compiling and running the code, will not present any problems. This seems to be in contradiction to the Functional Interface definition. We clearly have 3 abstract methods in there.</p>
 <p>About Functional Interfaces what we need to retain is that <strong>abstract methods that override public methods in java.lang.Object do not count to the total of the abstract methods in the interface</strong>.</p>
 <p>Having said that, the above code mantains it’s integrity as a functional interface, as only the perform() method does not overrides public methods from java.lang.Object.</p>
@@ -253,7 +245,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2018/04/22/lambda-expressions-part-two/" data-id="ck27jptp8000zeg7t4gojd8ai" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2018/04/22/lambda-expressions-part-two/" data-id="ck27kcxr0000wnv7tt14e1ppp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -469,7 +461,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">14</span></li></ul>
         </div>
     </div>
 
@@ -506,7 +498,7 @@ ga('send', 'pageview');
         <footer id="footer">
     <div class="container">
         <div class="container-inner">
-            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
                 <h1 class="logo-wrap">
                     <a href="/" class="logo"></a>

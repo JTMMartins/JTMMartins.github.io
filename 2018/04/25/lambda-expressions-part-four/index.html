@@ -19,14 +19,16 @@
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="04 - Function Composition">
-<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2018&#x2F;04&#x2F;25&#x2F;lambda-expressions-part-four&#x2F;index.html">
+<meta property="og:url" content="https://jtmmartins.github.io/2018/04/25/lambda-expressions-part-four/index.html">
 <meta property="og:site_name" content="JoseMartins">
 <meta property="og:description" content="Function composition is the ability to create simple and reusable functions that can be combined in order to create more complex functions. Java made this easy">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2018&#x2F;04&#x2F;25&#x2F;lambda-expressions-part-four&#x2F;lambdas-4.png">
+<meta property="og:image" content="https://jtmmartins.github.io/2018/04/25/lambda-expressions-part-four/lambdas-4.png">
 <meta property="og:updated_time" content="2018-04-26T11:16:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2018&#x2F;04&#x2F;25&#x2F;lambda-expressions-part-four&#x2F;lambdas-4.png">
+<meta name="twitter:title" content="04 - Function Composition">
+<meta name="twitter:description" content="Function composition is the ability to create simple and reusable functions that can be combined in order to create more complex functions. Java made this easy">
+<meta name="twitter:image" content="https://jtmmartins.github.io/2018/04/25/lambda-expressions-part-four/lambdas-4.png">
                             
 
                                 
@@ -176,30 +178,27 @@ ga('send', 'pageview');
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>
+        <a class="tag-link" href="/tags/Java/">Java</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <img src="/2018/04/25/lambda-expressions-part-four/lambdas-4.png" class="">
+            <img src="/2018/04/25/lambda-expressions-part-four/lambdas-4.png">
 <p>Function composition is the ability to create simple and reusable functions that can be combined in order to create more complex functions. Java made this easy</p>
 <a id="more"></a>
-
-<p>In the programming world, the process of function composition is also known as <strong>currying</strong> in honour of <a href="https://en.wikipedia.org/wiki/Haskell_Curry" title="[external] [wikipedia]" target="">Haskell Brooks Curry</a>, an American mathematician well known for his work in the combinatory logic field.</p>
+<p>In the programming world, the process of function composition is also known as <strong>currying</strong> in honour of <a href="https://en.wikipedia.org/wiki/Haskell_Curry" title="[external] [wikipedia]" target="_blank" rel="noopener">Haskell Brooks Curry</a>, an American mathematician well known for his work in the combinatory logic field.</p>
 <p>Although the words “combinatory logic” are enough to deliver us a panic attack, Java actually made this an easy process. Let’s see how it works. </p>
 <p>The Function interface has two methods that allow us to compose functions. The <strong><em>andThen</em></strong> and <strong><em>compose</em></strong> methods.</p>
 <p>Let’s take a quick look to the <em>Function</em> interface source code from the <strong>java.util.function</strong></p>
 <figure class="highlight java"><figcaption><span>java.util.function.Function.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function</span>&lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">R <span class="title">apply</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;V, R&gt; <span class="title">compose</span><span class="params">(Function&lt;? <span class="keyword">super</span> V, ? extends T&gt; before)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(before);</span><br><span class="line">        <span class="keyword">return</span> (V v) -&gt; apply(before.apply(v));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;T, V&gt; <span class="title">andThen</span><span class="params">(Function&lt;? <span class="keyword">super</span> R, ? extends V&gt; after)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(after);</span><br><span class="line">        <span class="keyword">return</span> (T t) -&gt; after.apply(apply(t));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Function&lt;T, T&gt; <span class="title">identity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> t -&gt; t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>I have to be honest, the first time I saw the signature of <em>andThen()</em> and <em>compose()</em> methods, I had to go back and read <a href="http://www.oracle.com/technetwork/articles/java/juneau-generics-2255374.html" title="[external] [Oracle Website]" target="">this</a> a few times. If you feel like I did, well, just take a peek to the article to refresh your Generics. </p>
+<p>I have to be honest, the first time I saw the signature of <em>andThen()</em> and <em>compose()</em> methods, I had to go back and read <a href="http://www.oracle.com/technetwork/articles/java/juneau-generics-2255374.html" title="[external] [Oracle Website]" target="_blank" rel="noopener">this</a> a few times. If you feel like I did, well, just take a peek to the article to refresh your Generics. </p>
 <p>The <em>andThen()</em> method is combining the current function with another function named <em>after</em>. But this is done in a way that the first function is applied and the input type <em>T</em> is converted to type <em>R</em>. After that the <em>after</em> function is applied and converts the type <em>R</em> to type <em>V</em>.</p>
 <p>In simpler words the <em>andThen()</em> method applies both functions and also converts the type <em>T</em> to type <em>V</em>.</p>
 <p>The <em>compose()</em> method is quite similar in the away it works, however it inverts the order of how the functions are applied.</p>
-<p>Let’s see a quick example.*(please note that I’m not using streams, because this series is about lambda expressions and the objective is to train our brain in creating functions, even if they look weird :) *.</p>
+<p>Let’s see a quick example.<em>(please note that I’m not using streams, because this series is about lambda expressions and the objective is to train our brain in creating functions, even if they look weird :) </em>.</p>
 <figure class="highlight java"><figcaption><span>app.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Function;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> Function&lt;List&lt;Integer&gt;, List&lt;Integer&gt;&gt; doubleNumbersFunc;</span><br><span class="line">	<span class="keyword">static</span> Function&lt;List&lt;Integer&gt;, List&lt;Integer&gt;&gt; squareNumbersFunc;</span><br><span class="line">	<span class="keyword">static</span> Function&lt;List&lt;Integer&gt;, List&lt;Integer&gt;&gt; composedFunctionWithAndThen;</span><br><span class="line">	<span class="keyword">static</span> Function&lt;List&lt;Integer&gt;, List&lt;Integer&gt;&gt; composedFunctionWithCompose;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> &#123;<span class="comment">// first static block</span></span><br><span class="line">		doubleNumbersFunc = numbers -&gt; &#123;</span><br><span class="line">			List&lt;Integer&gt; rethey aresult = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">			<span class="keyword">for</span> (Integer i : numbers) &#123;</span><br><span class="line">				result.add(i * <span class="number">2</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> result;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> &#123;<span class="comment">// Second static block</span></span><br><span class="line">		squareNumbersFunc = numbers -&gt; &#123;</span><br><span class="line">			List&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">			<span class="keyword">for</span> (Integer i : numbers) &#123;</span><br><span class="line">				result.add(i * i);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> result;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> &#123;<span class="comment">//third static block</span></span><br><span class="line">		composedFunctionWithAndThen=doubleNumbersFunc.andThen(squareNumbersFunc);</span><br><span class="line">		composedFunctionWithCompose=doubleNumbersFunc.compose(squareNumbersFunc);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">9</span>);</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"AndThen Result :"</span> + composedFunctionWithAndThen.apply(list));</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"Compose Result :"</span> + composedFunctionWithCompose.apply(list));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>when run, this code prints </p>
 <p>AndThen Result :[4, 16, 100, 324]<br>Compose Result :[2, 8, 50, 162]</p>
 <p>So what is happening ?</p>
@@ -210,11 +209,9 @@ ga('send', 'pageview');
 <p>in the main method, we print the <em>apply()</em> of each of the combined functions.</p>
 <p>As you can see, the result is different. This happens because <strong>andThen()</strong> applies the functions from left to right and <strong>compose()</strong> applies the functions from right to left.</p>
 <p>in the above example this is how the <strong>andThen()</strong> worked,</p>
-<img src="/2018/04/25/lambda-expressions-part-four/composedFunction1.png" class="">
-
+<img src="/2018/04/25/lambda-expressions-part-four/composedFunction1.png">
 <p>and this is how the <strong>compose()</strong> worked,</p>
-<img src="/2018/04/25/lambda-expressions-part-four/composedFunction2.png" class="">
-
+<img src="/2018/04/25/lambda-expressions-part-four/composedFunction2.png">
 <p>The process is very straightforward, but we need extra care if we start assembling functions with nested <em>andThen()</em> and <em>compose()</em>.</p>
 <p>The last one in the <em>Function</em> interface is the <strong>identity()</strong>. This method’s mission is very simple. It just returns back the parameter which it gets as input. Usually the use of <strong>identity()</strong> is not to modify a value that has arrived to a function, and its usefulness becomes more obvious when used in conjunction with the <strong>java.util.stream.api</strong>.</p>
 <p>In the next post I will look into another Functional interface. The <strong>Predicate</strong>. Don’t get upset. It’s only the programmers jargon for something that evaluate if a condition is true or false.</p>
@@ -226,7 +223,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2018/04/25/lambda-expressions-part-four/" data-id="ck27jptp1000keg7t3exj51j1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2018/04/25/lambda-expressions-part-four/" data-id="ck27kcxqw000knv7te82gq7w5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -442,7 +439,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">14</span></li></ul>
         </div>
     </div>
 
@@ -479,7 +476,7 @@ ga('send', 'pageview');
         <footer id="footer">
     <div class="container">
         <div class="container-inner">
-            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
                 <h1 class="logo-wrap">
                     <a href="/" class="logo"></a>

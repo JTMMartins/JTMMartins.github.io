@@ -15,18 +15,20 @@
                 
                     <meta name="keywords" content="Java,Design Patterns" />
                     
-                        <meta name="description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class defining a singleton that will be eager in">
+                        <meta name="description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class def">
 <meta name="keywords" content="Java,Design Patterns">
 <meta property="og:type" content="article">
 <meta property="og:title" content="The eager singleton">
-<meta property="og:url" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;26&#x2F;eager-singleton&#x2F;index.html">
+<meta property="og:url" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/index.html">
 <meta property="og:site_name" content="JoseMartins">
 <meta property="og:description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class defining a singleton that will be eager in">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;26&#x2F;eager-singleton&#x2F;eagersingleton1.jpeg">
+<meta property="og:image" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/eagersingleton1.jpeg">
 <meta property="og:updated_time" content="2017-12-09T19:19:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;jtmmartins.github.io&#x2F;2017&#x2F;11&#x2F;26&#x2F;eager-singleton&#x2F;eagersingleton1.jpeg">
+<meta name="twitter:title" content="The eager singleton">
+<meta name="twitter:description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class defining a singleton that will be eager in">
+<meta name="twitter:image" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/eagersingleton1.jpeg">
                             
 
                                 
@@ -176,24 +178,23 @@ ga('send', 'pageview');
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>
+        <a class="tag-link" href="/tags/Design-Patterns/">Design Patterns</a>, <a class="tag-link" href="/tags/Java/">Java</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <img src="/2017/11/26/eager-singleton/eagersingleton1.jpeg" class="" title="[Eager Singleton]">
+            <img src="/2017/11/26/eager-singleton/eagersingleton1.jpeg" title="[Eager Singleton]">
 <p>As mentioned in this <a href="/2017/11/25/Singleton/" title="post">post</a> singletons can be instantiated in two different ways, and one of them is <em>eager instantiation</em>.</p>
 <p>Bellow we have an example of a class defining a singleton that will be eager instantiated.</p>
 <figure class="highlight java"><figcaption><span>EagerSingleton.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Singleton.eagersingleton;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EagerSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> EagerSingleton Instance = <span class="keyword">new</span> EagerSingleton();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EagerSingleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EagerSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomeWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"EagerSingleton is doing some work\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>In the above example, an instance of this object is created as soon as the JVM loads the class, so we should only use it if the needed computational resources are not extremely high. If they are, and we still believe that a singleton is the best option, than we should opt for the lazy instantiation.</p>
 <h2 id="what-is-going-on-in-this-class"><a href="#what-is-going-on-in-this-class" class="headerlink" title="what is going on in this class ?"></a>what is going on in this class ?</h2><p>As soon as the class is loaded the <em>final</em> attribute <em>instance</em> is instantiated in line 5.</p>
 <p>In line 7 we define the class constructor as private. This will prevent client code to instantiate the object via the new keyword. Due to this private constructor is not possible to use <code>EagerSingleton egSingleton=new EagerSingleton</code>.</p>
 <p>in order to get our instance we will need to call the static method on line 9, and that will return us the singleton object (which has been initialized at class loading time).</p>
 <p>After receiving an instance of the object, we can call all the public methods on it.</p>
-<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" title="" target="">git-hub</a></p>
+<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" target="_blank" rel="noopener">git-hub</a></p>
 <p>Happy coding.</p>
 
         </div>
@@ -202,7 +203,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2017/11/26/eager-singleton/" data-id="ck27jptox000eeg7ta22vf8ag" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2017/11/26/eager-singleton/" data-id="ck27kcxqr000anv7tn4k2iw4a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -418,7 +419,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/" rel="tag">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/" rel="tag">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/" rel="tag">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Patterns/">Design Patterns</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">14</span></li></ul>
         </div>
     </div>
 
@@ -455,7 +456,7 @@ ga('send', 'pageview');
         <footer id="footer">
     <div class="container">
         <div class="container-inner">
-            <a id="back-to-top" href="javascript:;" target="_blank" rel="noopener"><i class="icon fa fa-angle-up"></i></a>
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
                 <h1 class="logo-wrap">
                     <a href="/" class="logo"></a>
