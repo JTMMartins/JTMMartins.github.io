@@ -6,29 +6,27 @@
     
         <title>
             
-                The eager singleton |
+                Parameterized unit tests with JUnit 4 |
                     
                         JoseMartins
         </title>
         
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                 
-                    <meta name="keywords" content="Java,Design Patterns" />
+                    <meta name="keywords" content="Testing,Junit 4" />
                     
-                        <meta name="description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class def">
-<meta name="keywords" content="Java,Design Patterns">
+                        <meta name="description" content="If you are a good developer, you write tests, period. As any piece of code, well written tests should be clear, concise, easy to maintain and actually test some">
+<meta name="keywords" content="Testing,Junit 4">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The eager singleton">
-<meta property="og:url" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/index.html">
+<meta property="og:title" content="Parameterized unit tests with JUnit 4">
+<meta property="og:url" content="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/index.html">
 <meta property="og:site_name" content="JoseMartins">
-<meta property="og:description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class defining a singleton that will be eager in">
+<meta property="og:description" content="If you are a good developer, you write tests, period. As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. And that, as everything in life,">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/eagersingleton1.jpeg">
-<meta property="og:updated_time" content="2017-12-09T19:19:48.000Z">
+<meta property="og:updated_time" content="2019-10-26T23:58:55.458Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The eager singleton">
-<meta name="twitter:description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class defining a singleton that will be eager in">
-<meta name="twitter:image" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/eagersingleton1.jpeg">
+<meta name="twitter:title" content="Parameterized unit tests with JUnit 4">
+<meta name="twitter:description" content="If you are a good developer, you write tests, period. As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. And that, as everything in life,">
                             
 
                                 
@@ -149,18 +147,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
+    <a class="page-title-link" href="/categories/Testing/">Testing</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Testing/Junit-4/">Junit 4</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-eager-singleton" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Parameterized-unit-tests-with-Junit-4" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        The eager singleton
+        Parameterized unit tests with JUnit 4
         </h1>
     
 
@@ -170,32 +168,53 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/26/eager-singleton/" class="article-date">
-            <time datetime="2017-11-26T18:58:32.000Z" itemprop="datePublished">2017-11-26</time>
+        <a href="/2019/10/26/Parameterized-unit-tests-with-Junit-4/" class="article-date">
+            <time datetime="2019-10-26T20:10:22.000Z" itemprop="datePublished">2019-10-26</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Design-Patterns/">Design Patterns</a>, <a class="tag-link" href="/tags/Java/">Java</a>
+        <a class="tag-link" href="/tags/Junit-4/">Junit 4</a>, <a class="tag-link" href="/tags/Testing/">Testing</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <img src="/2017/11/26/eager-singleton/eagersingleton1.jpeg" title="[Eager Singleton]">
-<p>As mentioned in this <a href="/2017/11/25/Singleton/" title="post">post</a> singletons can be instantiated in two different ways, and one of them is <em>eager instantiation</em>.</p>
-<p>Bellow we have an example of a class defining a singleton that will be eager instantiated.</p>
-<figure class="highlight java"><figcaption><span>EagerSingleton.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Singleton.eagersingleton;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EagerSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> EagerSingleton Instance = <span class="keyword">new</span> EagerSingleton();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EagerSingleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EagerSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomeWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"EagerSingleton is doing some work\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>In the above example, an instance of this object is created as soon as the JVM loads the class, so we should only use it if the needed computational resources are not extremely high. If they are, and we still believe that a singleton is the best option, than we should opt for the lazy instantiation.</p>
-<h2 id="what-is-going-on-in-this-class"><a href="#what-is-going-on-in-this-class" class="headerlink" title="what is going on in this class ?"></a>what is going on in this class ?</h2><p>As soon as the class is loaded the <em>final</em> attribute <em>instance</em> is instantiated in line 5.</p>
-<p>In line 7 we define the class constructor as private. This will prevent client code to instantiate the object via the new keyword. Due to this private constructor is not possible to use <code>EagerSingleton egSingleton=new EagerSingleton</code>.</p>
-<p>in order to get our instance we will need to call the static method on line 9, and that will return us the singleton object (which has been initialized at class loading time).</p>
-<p>After receiving an instance of the object, we can call all the public methods on it.</p>
-<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" target="_blank" rel="noopener">git-hub</a></p>
-<p>Happy coding.</p>
+            <p>If you are a good developer, you write tests, period.</p>
+<p>As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. And that, as everything in life, comes with experience.</p>
+<p>Today we are going to talk about <strong>parameterized unit tests</strong>, as they provide you with ways of making your unit test development more complete, less tedious, more readable and much easier to maintain.</p>
+<p>It is worth noticing that JUnit 4 has not chosen a very flexible approach to parametrized tests. They improved significantly in JUnit 5 (which I will visit in a future post).<br>If you aim for the maximum power and flexibility you should add <strong>JUnitParams</strong> to your project (I will also visit this JUnit addon in a future post).</p>
+<h4 id="What-kind-of-problems-does-a-Parameterized-Unit-Test-solves"><a href="#What-kind-of-problems-does-a-Parameterized-Unit-Test-solves" class="headerlink" title="What kind of problems does a Parameterized Unit Test solves ?"></a>What kind of problems does a Parameterized Unit Test solves ?</h4><p>You are aware of the DRY principle, however if you are not yet using parameterized tests you may have found yourself in situations where you have to repeat the same code across several tests methods,where you have to assert some result based on a situation where only one field of the same object changes. </p>
+<p>This is precisely the problem that parameterized tests solve.</p>
+<p>So let’s create a very small but illustrative problem and see how we can write a parameterized test for it. We will then try to examine what was the benefit we got.<br>At the end, it will also become clear that code coverage, is not always your friend and a clear judgment has to be made before accepting a code coverage percentage as a measure of quality.</p>
+<p>This is not a post about TDD, so if you are a unit test purist, please accept my apologies for the code first approach.</p>
+<p>We have a Purchase</p>
+<figure class="highlight java"><figcaption><span>Purchase.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Purchase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">private</span> PurchaseStatus status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The purchase can have 4 different statuses that are enumerated </p>
+<figure class="highlight java"><figcaption><span>PurchaseStatus.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> PurchaseStatus &#123;</span><br><span class="line">    CONFIRMED,</span><br><span class="line">    COMPLETED,</span><br><span class="line">    FAILED,</span><br><span class="line">    PENDING;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We need to process the purchases. For that purpose we have a purchaseJob that will do the work.<br>As long as the purchase has a completed status it will be processed and all the other statuses will not. In our example, we just return true or false, depending of the Purchase status.</p>
+<figure class="highlight java"><figcaption><span>PurchaseJob.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PurchaseJob</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">process</span><span class="params">(Purchase purchase)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> PurchaseStatus.COMPLETED.equals(purchase.getStatus());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>So, what can we see from the code ? A purchase can arrive to the method <strong><em>process()</em></strong> with any of the 4 possible status.</p>
+<p>Depending on that status things will happen (although here as example, the only thing we get is a boolean).</p>
+<p>This means that if we want to cover all the 4 possibilities we will have to write 4 test methods, where the only thing that changes is the value of the status field of the purchase.</p>
+<p>Imagine if we had 10 different statuses, or even if the <strong><em>process()</em></strong> method received 2 parameters that eventually lead to different outcomes depending on some business logic combinations.</p>
+<p>I would say we are heading for a couple of boring hours with lots of copy and paste (with all the errors associated with it).</p>
+<p>There is a better way, and lets go directly to it</p>
+<figure class="highlight java"><figcaption><span>PurchaseService.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(Parameterized.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PurchaseJobTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Parameterized</span>.Parameters</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Iterable&lt;? extends Object&gt; data() &#123;</span><br><span class="line">        <span class="keyword">final</span> Purchase purchaseConfirmed = <span class="keyword">new</span> Purchase(<span class="number">1L</span>, PurchaseStatus.CONFIRMED);</span><br><span class="line">        <span class="keyword">final</span> Purchase purchaseFailed = <span class="keyword">new</span> Purchase(<span class="number">2L</span>, PurchaseStatus.FAILED);</span><br><span class="line">        <span class="keyword">final</span> Purchase purchasePending = <span class="keyword">new</span> Purchase(<span class="number">3L</span>, PurchaseStatus.PENDING);</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(purchaseConfirmed, purchaseFailed, purchasePending);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PurchaseJob purchaseService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Parameterized</span>.Parameter(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">public</span> Purchase purchase;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        purchaseService = <span class="keyword">new</span> PurchaseJob();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processPurchase_returnsFalse</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Assert.assertFalse(purchaseService.process(purchase));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Before dissecting what is happening, lets look at the pros :</p>
+<ul>
+<li>We only have one test method that covers 3 possible status.</li>
+<li>If one day we need to add a new status, we just need to add the purchase to the <strong><em>data()</em></strong> method.</li>
+<li>It’s small, clean and readable.</li>
+<li>Executes faster than 3 methods, due to the way JUnit handles the work internally.</li>
+</ul>
+<p>and now the con :</p>
+<ul>
+<li>We should have one parameterized test class per method of the <strong>UUT</strong>.<br>Every <strong>@test</strong> annotated method will be executed with all the objects supplied by the collection, therefore if we have 4 methods we will be executing 12 tests (we can of course group test methods that need to be fed with all the elements from the collection (although I personally don’t like it).</li>
+</ul>
 
         </div>
         <footer class="article-footer">
@@ -203,7 +222,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2017/11/26/eager-singleton/" data-id="ck2887ov5000glh7th4g2n6nv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/" data-id="ck2887ouu0005lh7tcnei5xnq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -316,20 +335,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/26/enum-singleton/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            Hi there, I&#39;m the Enum singleton
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/11/25/Patterns/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/30/lambda-expressions-part-six/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Design Patterns introduction</p>
+        <p class="article-nav-title">06 - The consumer Interface</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -475,7 +484,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'josemartins';
     
     
-    var disqus_url = 'https://jtmmartins.github.io/2017/11/26/eager-singleton/';
+    var disqus_url = 'https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/';
     
     (function() {
     var dsq = document.createElement('script');

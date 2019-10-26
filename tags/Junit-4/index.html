@@ -6,29 +6,23 @@
     
         <title>
             
-                The eager singleton |
+                Tag: Junit 4 |
                     
                         JoseMartins
         </title>
         
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                 
-                    <meta name="keywords" content="Java,Design Patterns" />
-                    
-                        <meta name="description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class def">
-<meta name="keywords" content="Java,Design Patterns">
-<meta property="og:type" content="article">
-<meta property="og:title" content="The eager singleton">
-<meta property="og:url" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/index.html">
+                        <meta name="description" content="a Java blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JoseMartins">
+<meta property="og:url" content="https://jtmmartins.github.io/tags/Junit-4/index.html">
 <meta property="og:site_name" content="JoseMartins">
-<meta property="og:description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class defining a singleton that will be eager in">
+<meta property="og:description" content="a Java blog">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/eagersingleton1.jpeg">
-<meta property="og:updated_time" content="2017-12-09T19:19:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The eager singleton">
-<meta name="twitter:description" content="As mentioned in this post singletons can be instantiated in two different ways, and one of them is eager instantiation. Bellow we have an example of a class defining a singleton that will be eager in">
-<meta name="twitter:image" content="https://jtmmartins.github.io/2017/11/26/eager-singleton/eagersingleton1.jpeg">
+<meta name="twitter:title" content="JoseMartins">
+<meta name="twitter:description" content="a Java blog">
                             
 
                                 
@@ -149,133 +143,55 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
+    <i class="icon fa fa-tag"></i>Tag: <em>Junit 4</em>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-eager-singleton" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            
+
+    
+    
         
-            <header class="article-header">
-                
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2019" class="archive-year"><i class="icon fa fa-calendar-o"></i>2019</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Testing/">Testing</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Testing/Junit-4/">Junit 4</a>
+            </div>
+            <div class="date"><time datetime="2019-10-26T20:10:22.000Z" itemprop="datePublished">2019-10-26</time></div>
+        </div>
+        
     
         <h1 class="article-title" itemprop="name">
-        The eager singleton
+        <a href="/2019/10/26/Parameterized-unit-tests-with-Junit-4/">Parameterized unit tests with JUnit 4</a>
         </h1>
     
 
-            </header>
-        
-        
-            <div class="article-meta">
-                
-    <div class="article-date">
-        <a href="/2017/11/26/eager-singleton/" class="article-date">
-            <time datetime="2017-11-26T18:58:32.000Z" itemprop="datePublished">2017-11-26</time>
-        </a>
-    </div>
-
-                
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Design-Patterns/">Design Patterns</a>, <a class="tag-link" href="/tags/Java/">Java</a>
-    </div>
-
-            </div>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-            <img src="/2017/11/26/eager-singleton/eagersingleton1.jpeg" title="[Eager Singleton]">
-<p>As mentioned in this <a href="/2017/11/25/Singleton/" title="post">post</a> singletons can be instantiated in two different ways, and one of them is <em>eager instantiation</em>.</p>
-<p>Bellow we have an example of a class defining a singleton that will be eager instantiated.</p>
-<figure class="highlight java"><figcaption><span>EagerSingleton.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Singleton.eagersingleton;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EagerSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> EagerSingleton Instance = <span class="keyword">new</span> EagerSingleton();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">EagerSingleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EagerSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomeWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"EagerSingleton is doing some work\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>In the above example, an instance of this object is created as soon as the JVM loads the class, so we should only use it if the needed computational resources are not extremely high. If they are, and we still believe that a singleton is the best option, than we should opt for the lazy instantiation.</p>
-<h2 id="what-is-going-on-in-this-class"><a href="#what-is-going-on-in-this-class" class="headerlink" title="what is going on in this class ?"></a>what is going on in this class ?</h2><p>As soon as the class is loaded the <em>final</em> attribute <em>instance</em> is instantiated in line 5.</p>
-<p>In line 7 we define the class constructor as private. This will prevent client code to instantiate the object via the new keyword. Due to this private constructor is not possible to use <code>EagerSingleton egSingleton=new EagerSingleton</code>.</p>
-<p>in order to get our instance we will need to call the static method on line 9, and that will return us the singleton object (which has been initialized at class loading time).</p>
-<p>After receiving an instance of the object, we can call all the public methods on it.</p>
-<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" target="_blank" rel="noopener">git-hub</a></p>
-<p>Happy coding.</p>
-
-        </div>
-        <footer class="article-footer">
-            
-
-
-
-    <a data-url="https://jtmmartins.github.io/2017/11/26/eager-singleton/" data-id="ck2887ov5000glh7th4g2n6nv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-        </footer>
+        <p class="article-excerpt">
+            If you are a good developer, you write tests, period.
+As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. And that, as everything in life, 
+        </p>
     </div>
 </article>
-
-    <section id="comments">
     
-        
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
+        </div>
     
-    </section>
+
+
+    </div></section>
+
 
 
                         </div>
@@ -312,29 +228,6 @@ ga('send', 'pageview');
             
         </ul>
     </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2017/11/26/enum-singleton/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            Hi there, I&#39;m the Enum singleton
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
-    
-    
-        <a href="/2017/11/25/Patterns/" id="article-nav-older" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Design Patterns introduction</p>
-        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
-        </a>
-    
-</nav>
-
     
     <div class="widgets-container">
         
@@ -475,13 +368,11 @@ ga('send', 'pageview');
     var disqus_shortname = 'josemartins';
     
     
-    var disqus_url = 'https://jtmmartins.github.io/2017/11/26/eager-singleton/';
-    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
