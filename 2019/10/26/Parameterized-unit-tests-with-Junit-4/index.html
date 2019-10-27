@@ -24,7 +24,7 @@
 <meta property="og:description" content="If you are a governed by conscience developer, you write tests, period. As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. As everything">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/junit4parameterized.jpg">
-<meta property="og:updated_time" content="2019-10-27T16:57:07.098Z">
+<meta property="og:updated_time" content="2019-10-27T17:50:24.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Parameterized unit tests with JUnit 4">
 <meta name="twitter:description" content="If you are a governed by conscience developer, you write tests, period. As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. As everything">
@@ -219,7 +219,7 @@ ga('send', 'pageview');
 <p>Although not practical, in JUnit4 that’s how it works. The test methods will run as many times as the number of objects present in the collection. In other words, the <em>runner</em> will iterate trough each <strong>@test</strong> method as many times as the number of objects in the collection, and in every iteration one object from that collection will be supplied.</p>
 <p>Bear in mind that, had we included the positive test method in this class, the test would continue to pass, as we are forcing the purchase to be in a <code>COMPLETE</code> status manually, however this positive test method would run 3 times, which is a completely waste of time and resources.</p>
 <p>The final step is the <strong><em>not mandatory</em></strong> <code>@Parameterized.Parameter(0)</code>. The advantage of this annotation is that it will handle the injection of the parameter for us, therefore we do not need a constructor for the test class. If we choose not to use this annotation, then we will have to provide a constructor for the test class. </p>
-<p>Note the number zero in the annotation ? It is also not mandatory as it always defaults to zero and if you just type <code>@Parameterized.Parameter</code> no one will complaint.<br>I prefer to use it <sub><sup>(although some IDE’s might complaint)</sup></sub>, to leave clear that it is the first object present in the array column. This means, obviously that we can have more than one parameter being supplied, and we will annotate their respective fields with <code>@Parameterized.Parameter(1)</code>, <code>@Parameterized.Parameter(2)</code>, and so forth, according to the column they live in the array.</p>
+<p>Note the number zero in the annotation. It is also not mandatory as it always defaults to zero and if you just type <code>@Parameterized.Parameter</code> no one will complaint.<br>I prefer to use it <sub><sup>(although some IDE’s might complaint)</sup></sub>, to be explicit that is the object present in the first array column. This means, obviously that we can have more than one parameter being supplied, and we will annotate their respective fields with <code>@Parameterized.Parameter(1)</code>, <code>@Parameterized.Parameter(2)</code>, and so forth, according to the column they live in the array.</p>
 <p>pros :</p>
 <ul>
 <li>We only have one test method that covers 3 possible status.</li>
@@ -241,7 +241,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/" data-id="ck298kwix00033v7tn54k250z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/" data-id="ck29agxps0003tc7t44qpfgtx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
