@@ -24,7 +24,7 @@
 <meta property="og:description" content="If you are a governed by conscience developer, you write tests, period. As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. As everything">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/junit4parameterized.png">
-<meta property="og:updated_time" content="2019-10-27T14:50:20.456Z">
+<meta property="og:updated_time" content="2019-10-27T14:53:11.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Parameterized unit tests with JUnit 4">
 <meta name="twitter:description" content="If you are a governed by conscience developer, you write tests, period. As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. As everything">
@@ -216,7 +216,7 @@ ga('send', 'pageview');
 <p>We start to annotate the class with <code>@RunWith(Parameterized.class)</code> to ensure that JUnit will invoke the referenced class to run the tests instead of the default <em>runner</em> built into JUnit (see <a href="https://junit.org/junit4/javadoc/latest/org/junit/runner/RunWith.html" target="_blank" rel="noopener">Junit-runWith-JavaDoc</a>) </p>
 <p>The second step is to create a <strong>public static</strong> method annotated with <code>@Parameterized.Parameters</code> that returns a <strong>Collection</strong> of object arrays. I’ve used the Iterable interface which is the root interface in the collection hierarchy, but we could have chosen to return a <code>List &lt;Purchase&gt;</code> and, in our case, it would work without any problems.</p>
 <p>The objects that are part of the collection returned from this <strong><em>dataProvider()</em></strong> method are the ones that will be supplied to <strong>all</strong> the test methods in the class. </p>
-<p>Although not practical, in JUnit4 that is how it works. The test methods will run as many times as the number of objects present in the collection. In other words, the <em>runner</em> will iterate as many times as the number of objects in the collection, and in every iteration one object will be supplied to the each <strong>@test</strong> method.</p>
+<p>Although not practical, in JUnit4 that’s how it works. The test methods will run as many times as the number of objects present in the collection. In other words, the <em>runner</em> will iterate trough each <strong>@test</strong> method as many times as the number of objects in the collection, and in every iteration one object from that collection will be supplied.</p>
 <p>Bear in mind that, had we included the positive test method in this class, the test would continue to pass, as we are forcing the purchase to be in a <code>COMPLETE</code> status manually, however this positive test method would run 3 times, which is a completely waste of time and resources.</p>
 <p>The final step is the <strong><em>not mandatory</em></strong> <code>@Parameterized.Parameter(0)</code>. The advantage of this annotation is that it will handle the injection of the parameter for us, therefore we do not need a constructor for the test class. If we choose not to use this annotation, then we will have to provide a constructor for the test class. </p>
 <p>Note the number zero in the annotation ? It is also not mandatory as it always defaults to zero and if you just type <code>@Parameterized.Parameter</code> no one will complaint.<br>I prefer to use it <sub><sup>(although some IDE’s might complaint)</sup></sub>, to leave clear that it is the first object present in the array column. This means, obviously that we can have more than one parameter being supplied, and we will annotate their respective fields with <code>@Parameterized.Parameter(1)</code>, <code>@Parameterized.Parameter(2)</code>, and so forth, according to the column they live in the array.</p>
@@ -240,7 +240,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/" data-id="ck2941gcq0003el7tvthkm3ne" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/10/26/Parameterized-unit-tests-with-Junit-4/" data-id="ck29455oy0005ip7td2z5c5mr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
