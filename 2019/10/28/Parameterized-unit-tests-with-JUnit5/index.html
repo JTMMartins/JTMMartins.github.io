@@ -6,29 +6,29 @@
     
         <title>
             
-                Introduction to factories |
+                Parameterized unit tests with JUnit5 |
                     
                         JoseMartins
         </title>
         
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                 
-                    <meta name="keywords" content="Java,Design Patterns" />
+                    <meta name="keywords" content="Testing,Junit 5" />
                     
-                        <meta name="description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s">
-<meta name="keywords" content="Java,Design Patterns">
+                        <meta name="description" content="The first thing we have to say is that the limited and somewhat cumbersome way of doing unit tests with the previous JUnit version, has gone. Kudos for the JUni">
+<meta name="keywords" content="Testing,Junit 5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Introduction to factories">
-<meta property="og:url" content="https://jtmmartins.github.io/2017/11/28/Simple-Factory/index.html">
+<meta property="og:title" content="Parameterized unit tests with JUnit5">
+<meta property="og:url" content="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/index.html">
 <meta property="og:site_name" content="JoseMartins">
-<meta property="og:description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementa">
+<meta property="og:description" content="The first thing we have to say is that the limited and somewhat cumbersome way of doing unit tests with the previous JUnit version, has gone. Kudos for the JUnit team for that, and kudos for an excel">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://jtmmartins.github.io/2017/11/28/Simple-Factory/simpleFactory1.png">
-<meta property="og:updated_time" content="2017-12-09T19:20:27.000Z">
+<meta property="og:image" content="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/parameterizedUnitTestsJ5.jpg">
+<meta property="og:updated_time" content="2019-10-30T00:14:29.180Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Introduction to factories">
-<meta name="twitter:description" content="This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementa">
-<meta name="twitter:image" content="https://jtmmartins.github.io/2017/11/28/Simple-Factory/simpleFactory1.png">
+<meta name="twitter:title" content="Parameterized unit tests with JUnit5">
+<meta name="twitter:description" content="The first thing we have to say is that the limited and somewhat cumbersome way of doing unit tests with the previous JUnit version, has gone. Kudos for the JUnit team for that, and kudos for an excel">
+<meta name="twitter:image" content="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/parameterizedUnitTestsJ5.jpg">
                             
 
                                 
@@ -149,18 +149,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
+    <a class="page-title-link" href="/categories/Testing/">Testing</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Testing/Junit-5/">Junit 5</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-Simple-Factory" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Parameterized-unit-tests-with-JUnit5" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Introduction to factories
+        Parameterized unit tests with JUnit5
         </h1>
     
 
@@ -170,60 +170,58 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/28/Simple-Factory/" class="article-date">
-            <time datetime="2017-11-28T22:32:43.000Z" itemprop="datePublished">2017-11-28</time>
+        <a href="/2019/10/28/Parameterized-unit-tests-with-JUnit5/" class="article-date">
+            <time datetime="2019-10-28T22:59:26.000Z" itemprop="datePublished">2019-10-28</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Design-Patterns/">Design Patterns</a>, <a class="tag-link" href="/tags/Java/">Java</a>
+        <a class="tag-link" href="/tags/Junit-5/">Junit 5</a>, <a class="tag-link" href="/tags/Testing/">Testing</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <img src="/2017/11/28/Simple-Factory/simpleFactory1.png" title="[A simple factory]">
-<p>This post is an introduction to factories, and we will try to implement a very simple situation, that will allow us to better understand what factories do. It’s by no mean the best factory implementation, and it does not intends to be, however due to it’s simplicity it will help us to illustrate the idea. More complex factories will be discussed in other posts.</p>
-<h3 id="So-why-factories"><a href="#So-why-factories" class="headerlink" title="So, why factories ?"></a>So, why factories ?</h3><p>The factory pattern is used when we need to create an object but we will only know what kind of object to create during run time.</p>
-<p>There are different ways to implement factories, and the option to choose one of them depends on the problem we want to solve, but they all share the same advantages :</p>
+            <img src="/2019/10/28/Parameterized-unit-tests-with-JUnit5/parameterizedUnitTestsJ5.jpg" title="[parameterized test]">
+<p>The first thing we have to say is that the limited and somewhat cumbersome way of doing unit tests with the previous JUnit version, has gone. Kudos for the JUnit team for that, and kudos for an excellent documentation that you can find <a href="https://junit.org/junit5/docs/current/user-guide/" target="_blank" rel="noopener">here</a>. </p>
+<p>Having said that, lets take a quick look into the main differences provided by JUnit 5, in the area of parameterized tests :</p>
 <ul>
-<li>Hiding the implementation logic behind object creation.</li>
-<li>All implementation logic is removed from the client code.</li>
-<li>we can change the logic of an object creation without touching the client code.</li>
-<li>we code for interface rather than implementation.</li>
+<li>We can run parameterized tests mixed with regular ones in the same class.</li>
+<li>We can have several completely different parameterized tests in the same class, receiving different datasets.</li>
+<li>Annotations indicating that we will run a parameterized test is now at method level and not at class level.</li>
+<li>A number of pre-prepared annotations are available so that we do not have to write code.</li>
+<li>Arguments from the dataset are injected as method parameters and not as instance variables.</li>
+<li>If we only have one parameter, we can use Streams.</li>
 </ul>
-<p>The above advantages make our code less coupled and easier to maintain.</p>
-<h3 id="What-is-the-main-idea"><a href="#What-is-the-main-idea" class="headerlink" title="What is the main idea ?"></a>What is the main idea ?</h3><p>In the real world, a factory produces goods according to market needs. Here, we are in objectland, so a factory will produce objects according to our requests, which may vary during the application run-time.</p>
-<p>To illustrate our example we will try to solve the following problem :</p>
-<p>Our application needs to implement a system that will send messages to our company customers, however we want to be able to send three different type of messages, Email, SMS and Fax (OK, I agree fax is old stuff, but we will use it anyway).</p>
-<p>Depending on some kind of input, that we will only know at run-time, our application has to be able to decide which kind of message to send.</p>
-<h3 id="Examining-our-problem"><a href="#Examining-our-problem" class="headerlink" title="Examining our problem"></a>Examining our problem</h3><p>The very first impulse, for a non object oriented mind will be a bunch of _if_ statements, based on that input, and job done. After all, its only 3 different type of messages !!</p>
-<p>What if…</p>
-<p>Next week we need to implement two more type of messages ? We will need to change all our code, and we will be facing, what I like to call an <em>if farm</em>, and we are half way to spaghetti code paradise. So, it does not look a very good idea.</p>
-<p>This is the kind of problem that the factory pattern proposes to solve.</p>
-<h3 id="A-better-approach"><a href="#A-better-approach" class="headerlink" title="A better approach"></a>A better approach</h3><p>If we look with an object oriented mind to the problem, we will spot a common element. They are all messages, only the way they are sent varies. Grouping them in a message interface seems a good starting point.</p>
-<p>Knowing that, we can then implement an <strong><em>message</em></strong> interface, with the single method <strong><em>SendMessage</em></strong>.</p>
-<p>Next we will write a class for each type of message, that will implement the <strong><em>message</em></strong> interface. In each of those classes we will then proceed with the actual implementation of the <strong><em>SendMessage</em></strong> method  </p>
-<p>In UML our very simple factory will look like this</p>
-<img src="/2017/11/28/Simple-Factory/FactoryPattern1.png" title="[Simple factory UML]">
-<h3 id="Coding-the-UML-visualization"><a href="#Coding-the-UML-visualization" class="headerlink" title="Coding the UML visualization"></a>Coding the UML visualization</h3><p>The Message interface</p>
-<figure class="highlight java"><figcaption><span>Message.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The three message classes </p>
-<figure class="highlight java"><figcaption><span>Email.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Email</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an Email with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><figcaption><span>SMS.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SMS</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an SMS with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><figcaption><span>Fax.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fax</span> <span class="keyword">implements</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'm sending an FAX with the text : "</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>In our UML diagram, we have the <strong><em>MessageType</em></strong> Enumerator. We will use it in our client code to select the type of message we want to send. We could pass Strings, but that would increase the possibility of typing errors, so the Enum, is safer.</p>
-<figure class="highlight java"><figcaption><span>MessageType.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> MessageType &#123;</span><br><span class="line">    FaxMessage,</span><br><span class="line">    SMSMessage,</span><br><span class="line">    EmailMessage</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>We now have the building blocks of our factory. The way I will use in this example to illustrate the factory implementation, is a very simple approach, but my intention is to introduce the concept of what a factory does, and in my humble opinion this makes the concept easier to understand. When we discuss more complex implementations it will be simpler to understand what is happening.</p>
-<figure class="highlight java"><figcaption><span>MessageFactory.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Message <span class="title">construct</span><span class="params">(MessageType type)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> SMSMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> SMS();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> EmailMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Email();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> FaxMessage:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Fax();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"Invalid Message Type"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>With the interface and classes in place, we can now very easily receive the object we want to send our messages. A very simple app will do to try it out.</p>
-<figure class="highlight java"><figcaption><span>App.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"><span class="keyword">package</span> FactoryPatternSimple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String messageText = <span class="string">" This is a message from our company. Many thanks"</span>;</span><br><span class="line">        </span><br><span class="line">        MessageType type = MessageType.SMSMessage;</span><br><span class="line">        Message messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        type = MessageType.EmailMessage;</span><br><span class="line">        messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line"></span><br><span class="line">        type = MessageType.FaxMessage;</span><br><span class="line">        messageSender = <span class="keyword">new</span> MessageFactory().construct(type);</span><br><span class="line">        messageSender.sendMessage(messageText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>I believe this is will help to grasp the concept behind factories, and when we discuss more complex types of factories everything will look much easier.</p>
-<p>An example for the code in this article can be found in <a href="https://github.com/JTMMartins/java-design-patterns" target="_blank" rel="noopener">git-hub</a></p>
-<p>Happy Coding.</p>
+<p>The possibilities open by JUnit 5, when compared with the previous version, are so many, that reading the documentation is essential. This post’s purpose is not to make an exhaustive analysis, but to introduce some of the new available possibilities.</p>
+<p>We will use a very similar example as the one use for parameterized tests with JUnit 4.</p>
+<p>We have a Purchase</p>
+<figure class="highlight java"><figcaption><span>Purchase.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Purchase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">private</span> PurchaseStatus status;</span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">private</span> TransactionStatus transactionStatus;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The purchase can have 4 different Purchase statuses that are enumerated</p>
+<figure class="highlight java"><figcaption><span>PurchaseStatus.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> PurchaseStatus &#123;</span><br><span class="line">    CONFIRMED,</span><br><span class="line">    COMPLETED,</span><br><span class="line">    FAILED,</span><br><span class="line">    PENDING;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>and also 7 Transaction status, also enumerated </p>
+<figure class="highlight java"><figcaption><span>TransactionStatus.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> TransactionStatus &#123;</span><br><span class="line">    NEW,</span><br><span class="line">    PENDINGCHARGE,</span><br><span class="line">    FAILEDCHARGE,</span><br><span class="line">    CHARGED,</span><br><span class="line">    PENDINGCREDIT,</span><br><span class="line">    FAILEDCREDIT,</span><br><span class="line">    CREDITED</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We need to process the purchases. For the purpose we have a purchaseJob that will do the work.<br>As long as the purchase has a <code>COMPLETED</code> status it will be processed and for all the other statuses it will not. In our example, we just return true or false, depending on the Purchase status. if a null purchase is supplied to the <strong>process()</strong> method, an exception will be thrown.</p>
+<p>We also have a <strong>getPaidPurchases()</strong> which will act as an imaginary DAO, returning a collection of <code>COMPLETED</code> purchases.</p>
+<figure class="highlight java"><figcaption><span>PurchaseJob.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PurchaseJob</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">process</span><span class="params">(<span class="keyword">final</span> Purchase purchase)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (purchase == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Purchase to process cannot be null"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> PurchaseStatus.COMPLETED.equals(purchase.getStatus());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Purchase&gt; <span class="title">getPaidPurchases</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(</span><br><span class="line">                <span class="keyword">new</span> Purchase(<span class="number">1L</span>, PurchaseStatus.COMPLETED, TransactionStatus.CHARGED),</span><br><span class="line">                <span class="keyword">new</span> Purchase(<span class="number">2L</span>, PurchaseStatus.COMPLETED, TransactionStatus.CHARGED),</span><br><span class="line">                <span class="keyword">new</span> Purchase(<span class="number">3L</span>, PurchaseStatus.COMPLETED, TransactionStatus.CHARGED)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>with this little example in place let’s head for the test</p>
+<figure class="highlight java"><figcaption><span>PurchaseJobTest.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PurchaseJobTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> PurchaseJob purchaseJob = <span class="keyword">new</span> PurchaseJob();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Stream&lt;Purchase&gt; <span class="title">purchaseStatusNegativeDataSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Stream.of(</span><br><span class="line">                <span class="keyword">new</span> Purchase(<span class="number">1L</span>, PurchaseStatus.CONFIRMED, TransactionStatus.NEW),</span><br><span class="line">                <span class="keyword">new</span> Purchase(<span class="number">2L</span>, PurchaseStatus.FAILED, TransactionStatus.FAILEDCHARGE),</span><br><span class="line">                <span class="keyword">new</span> Purchase(<span class="number">3L</span>, PurchaseStatus.PENDING, TransactionStatus.PENDINGCHARGE)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ParameterizedTest</span></span><br><span class="line">    <span class="meta">@MethodSource</span>(<span class="string">"purchaseStatusNegativeDataSet"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">processPurchase_returnsFalse</span><span class="params">(<span class="keyword">final</span> Purchase purchase)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Assertions.assertFalse(purchaseJob.process(purchase));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ParameterizedTest</span></span><br><span class="line">    <span class="meta">@NullSource</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">processPurchase_withNullPurchase_throwsIllegalArgumentException</span><span class="params">(Purchase purchase)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Assertions.assertThrows(IllegalArgumentException.class, () -&gt; purchaseJob.process(purchase));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">processPurchase_returnsTrue</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> Purchase purchase = <span class="keyword">new</span> Purchase(<span class="number">1L</span>, PurchaseStatus.COMPLETED, TransactionStatus.CHARGED);</span><br><span class="line"></span><br><span class="line">        Assertions.assertTrue(purchaseJob.process(purchase));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ParameterizedTest</span></span><br><span class="line">    <span class="meta">@EnumSource</span>(value = TransactionStatus.class, mode = EXCLUDE, names = &#123;<span class="string">"CHARGED"</span>&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">paidPurchases_haveAllTransactionStatusAsCharged</span><span class="params">(<span class="keyword">final</span> TransactionStatus transactionStatus)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        List&lt;Purchase&gt; purchases = purchaseJob.getPaidPurchases()</span><br><span class="line">                .stream()</span><br><span class="line">                .filter(p -&gt; (p.getTransactionStatus().equals(transactionStatus)))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        Assertions.assertTrue(purchases.isEmpty());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Let’s dissect what we have here. There is a lot going on.</p>
+<p>The first thing that jumps to the eye, is that there is no <strong><em>public</em></strong> access modifier in test methods. You can use it if you want. But there is no need for it.</p>
+<p>There is no class level annotation indicating any specific runner.</p>
+<p>The <strong>purchaseStatusNegativeDataSet()</strong> static method, responsible for supplying a collection of purchases, has no annotation.<br>So how does a parameterized test knows where to get the information from ?</p>
+<p>Easy. By annotating a method with <code>@ParameterizedTest</code> we are saying that we want a parameterized test and by the <code>@MethodSource(&quot;purchaseStatusNegativeDataSet&quot;)</code> we indicate where the dataset is coming from.<br>Then we just add a parameter to the method, and JUnit 5 will take care of injecting every item from the collection in that test and run it as many times as the number of items in the collection. We can see it in <strong>processPurchase_returnsFalse_forNotCompletedPurchaseStatus</strong></p>
+<p>Lets look now at the <strong>processPurchase_withNullPurchase_throwsIllegalArgumentException</strong> method. </p>
+<p>This is also considered a parameterized test, so the <code>@ParameterizedTest</code> annotation is present and also a <code>@NullSource</code>. The later indicates that we want to run the method with a <strong><em>null</em></strong> argument. So wherever, in the method, we use the argument JUnit 5 will make replace it by a <code>null</code>.</p>
+<p>The next one, is a standard <strong>@Test</strong> method. It lives happily amongst the parameterized ones.</p>
+<p>To finalize we have the <strong>paidPurchases_haveAllTransactionStatusAsCharged</strong>. A parameterized method that receives an enum as an argument, hence the <code>@EnumSource</code> annotation that will specify the Enum to be supplied. As you can see we can exclude as many constants as we want from the test (separating them by comma). In this case we are just excluding the <code>CHARGED</code> one.</p>
+<p>You will find much more in JUnit 5 excellent user guide section devoted to <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests" target="_blank" rel="noopener">parameterized tests</a> </p>
+<p>I hope this little post drives your curiosity to explore and start adding JUnit5 to your projects.</p>
+<p>An example for the code in this post can be found in <a href="https://github.com/JTMMartins/junit5parameterizedtests" target="_blank" rel="noopener">git-hub</a></p>
+<p>happy coding :)</p>
 
         </div>
         <footer class="article-footer">
@@ -231,7 +229,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2017/11/28/Simple-Factory/" data-id="ck2cj2wqz000d587t4h07tfuj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/" data-id="ck2cj2wqs0005587tqsxs9vkl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -344,20 +342,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/12/01/Decorator-Pattern/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            Decorator Pattern
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/11/28/Builder-Pattern/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/10/26/Parameterized-unit-tests-with-Junit-4/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">The builder Pattern, make it semantic</p>
+        <p class="article-nav-title">Parameterized unit tests with JUnit 4</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -503,7 +491,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'josemartins';
     
     
-    var disqus_url = 'https://jtmmartins.github.io/2017/11/28/Simple-Factory/';
+    var disqus_url = 'https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/';
     
     (function() {
     var dsq = document.createElement('script');
