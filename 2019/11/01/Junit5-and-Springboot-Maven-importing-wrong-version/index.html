@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="JoseMartins">
 <meta property="og:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some functionalities, we might have a solution to your problem. A couple of days ago, I was writ">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-01T01:46:51.922Z">
+<meta property="og:updated_time" content="2019-11-01T01:49:55.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Junit 5 and Spring boot 2.1.X-Maven importing wrong version">
 <meta name="twitter:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some functionalities, we might have a solution to your problem. A couple of days ago, I was writ">
@@ -195,7 +195,8 @@ ga('send', 'pageview');
 <p>All we have to do in our project’s Pom file, is to change the property name to <code>&lt;junit-jupiter.version&gt;</code> to match the same name as the Spring boot’s one, naming the dependency version variable accordingly.<br>Maven should now import the correct version to our project.</p>
 <p>If you come across this problem make sure your pom includes the following</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">&lt;properties&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;junit-jupiter.version&gt;5.5.2&lt;/junit-jupiter.version&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/properties&gt;</span><br><span class="line">...</span><br><span class="line"> </span><br><span class="line">&lt;dependencies&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">        &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;exclusions&gt;</span><br><span class="line">            &lt;exclusion&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">            &lt;/exclusion&gt;</span><br><span class="line">        &lt;/exclusions&gt;</span><br><span class="line">    &lt;/dependency&gt;    </span><br><span class="line">        ...</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;$&#123;junit-jupiter.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    ...    </span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<p>We will find this behavior with Spring boot versions lower than 2.1.7, in 2.1.8 and 2.1.9. With the release of Spring-boot-dependencies 2.2.0 the problem will not occur, as it already imports JUnit 5.5.2.</p>
+<p>We will find this behavior with Spring boot versions lower than 2.1.7, in 2.1.8 and 2.1.9. </p>
+<p>With the release of Spring-boot 2.2.0 the problem will not occur, as it already imports JUnit 5.5.2.</p>
 <p>Hope this helps.</p>
 <p>happy coding.</p>
 
@@ -205,7 +206,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" data-id="ck2fha65r0005zj7tqjv5k4zi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" data-id="ck2fhd1gl0005707tvtskpfmh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
