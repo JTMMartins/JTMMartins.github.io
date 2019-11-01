@@ -6,23 +6,27 @@
     
         <title>
             
-                Archive |
+                Junit 5 and Spring boot 2.1.X-Maven importing wrong version |
                     
                         JoseMartins
         </title>
         
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
                 
-                        <meta name="description" content="a Java blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JoseMartins">
-<meta property="og:url" content="https://jtmmartins.github.io/archives/index.html">
+                    <meta name="keywords" content="Testing,Junit 5,Spring-boot" />
+                    
+                        <meta name="description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some functionalities, we might have a solution to your p">
+<meta name="keywords" content="Testing,Junit 5,Spring-boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Junit 5 and Spring boot 2.1.X-Maven importing wrong version">
+<meta property="og:url" content="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/index.html">
 <meta property="og:site_name" content="JoseMartins">
-<meta property="og:description" content="a Java blog">
+<meta property="og:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some functionalities, we might have a solution to your problem. A couple of days ago, I was writ">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-01T01:46:51.922Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JoseMartins">
-<meta name="twitter:description" content="a Java blog">
+<meta name="twitter:title" content="Junit 5 and Spring boot 2.1.X-Maven importing wrong version">
+<meta name="twitter:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some functionalities, we might have a solution to your problem. A couple of days ago, I was writ">
                             
 
                                 
@@ -143,349 +147,137 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>Archive
+    <a class="page-title-link" href="/categories/Testing/">Testing</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Testing/Junit-5/">Junit 5</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-Junit5-and-Springboot-Maven-importing-wrong-version" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2019" class="archive-year"><i class="icon fa fa-calendar-o"></i>2019</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Testing/">Testing</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Testing/Junit-5/">Junit 5</a>
-            </div>
-            <div class="date"><time datetime="2019-11-01T00:22:06.000Z" itemprop="datePublished">2019-11-01</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/">Junit 5 and Spring boot 2.1.X-Maven importing wrong version</a>
+        Junit 5 and Spring boot 2.1.X-Maven importing wrong version
         </h1>
     
 
-        <p class="article-excerpt">
-            If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some functionalities, we might have a solution to your problem.
-A couple of days ago, I was writ
-        </p>
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" class="article-date">
+            <time datetime="2019-11-01T00:22:06.000Z" itemprop="datePublished">2019-11-01</time>
+        </a>
     </div>
-</article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Testing/">Testing</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Testing/Junit-5/">Junit 5</a>
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Junit-5/">Junit 5</a>, <a class="tag-link" href="/tags/Spring-boot/">Spring-boot</a>, <a class="tag-link" href="/tags/Testing/">Testing</a>
+    </div>
+
             </div>
-            <div class="date"><time datetime="2019-10-28T22:59:26.000Z" itemprop="datePublished">2019-10-28</time></div>
-        </div>
         
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/10/28/Parameterized-unit-tests-with-JUnit5/">Parameterized unit tests with JUnit5</a>
-        </h1>
-    
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some functionalities, we might have a solution to your problem.</p>
+<p>A couple of days ago, I was writing a unit test and surprisingly the IDE complained it couldn’t find where to import from interface for <code>@NullSource</code>. Well, I knew it does exists in JUnit 5, I’ve used it before and it is on JUnit Javadoc for the version 5.5.2.<br>This is one of those moments when we scratch our head with a <em>“What the heck”</em>…</p>
+<p>I revised the Pom file, just to make sure I had not made any mistake in the version, and it was correct, 5.5.2 <sub><sup>(at the time of this post, this is the latest stable version)</sup></sub>. I had defined it in the Pom properties as <code>&lt;version.junit&gt;5.5.2&lt;/version.junit&gt;</code> and was also excluding JUnit from the <em><artifactid>spring-boot-starter-test</artifactid></em>. The dependencies section also had the corresponding </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;version.junit&#125;&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>so, everything looked correct.</p>
+<p>A quick look into the .m2 folder, revealed the presence of version 5.3.2, so I deleted it and run maven clean package on the project while monitoring the <code>.m2/repository/org/junit/jupiter/junit-jupiter-params</code>  folder. To my surprise, version 5.3.2 magically reappeared. Unfortunately, this is one of those things we now will make us lose some precious time while trying to pinpoint the problem.</p>
+<p>In another project I had JUnit working perfectly with version 5.5.2, but the “offending” project was using Spring boot 2.1.7.RELEASE and the other wasn’t, so I focused my attention on that.</p>
+<h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><p>By checking Spring boot’s 2.1.7-RELEASE <a href="https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/2.1.7.RELEASE/spring-boot-dependencies-2.1.7.RELEASE.pom" target="_blank" rel="noopener">dependencies</a>, we can verify it imports <code>&lt;junit-jupiter.version&gt;5.3.2&lt;/junit-jupiter.version&gt;</code>, and that’s not the version we want.</p>
+<p>The solution is then, very simple. </p>
+<p>All we have to do in our project’s Pom file, is to change the property name to <code>&lt;junit-jupiter.version&gt;</code> to match the same name as the Spring boot’s one, naming the dependency version variable accordingly.<br>Maven should now import the correct version to our project.</p>
+<p>If you come across this problem make sure your pom includes the following</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">&lt;properties&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;junit-jupiter.version&gt;5.5.2&lt;/junit-jupiter.version&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/properties&gt;</span><br><span class="line">...</span><br><span class="line"> </span><br><span class="line">&lt;dependencies&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">        &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;exclusions&gt;</span><br><span class="line">            &lt;exclusion&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">            &lt;/exclusion&gt;</span><br><span class="line">        &lt;/exclusions&gt;</span><br><span class="line">    &lt;/dependency&gt;    </span><br><span class="line">        ...</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;$&#123;junit-jupiter.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    ...    </span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>We will find this behavior with Spring boot versions lower than 2.1.7, in 2.1.8 and 2.1.9. With the release of Spring-boot-dependencies 2.2.0 the problem will not occur, as it already imports JUnit 5.5.2.</p>
+<p>Hope this helps.</p>
+<p>happy coding.</p>
 
-        <p class="article-excerpt">
+        </div>
+        <footer class="article-footer">
             
-JUnit5 brings joy to the world of testing, and the category of parameterized tests is no exception.All the limited and somewhat cumbersome way of developing unit tests with the previous version, has 
-        </p>
+
+
+
+    <a data-url="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" data-id="ck2fha65r0005zj7tqjv5k4zi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
-    
-        </div>
-    
 
+    <section id="comments">
     
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
         
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Testing/">Testing</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Testing/Junit-4/">Junit 4</a>
-            </div>
-            <div class="date"><time datetime="2019-10-26T20:10:22.000Z" itemprop="datePublished">2019-10-26</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/10/26/Parameterized-unit-tests-with-Junit-4/">Parameterized unit tests with JUnit 4</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-If you are a governed by conscience developer, you write tests, period.
-As any piece of code, well written tests should be clear, concise, easy to maintain and actually test something. As everything 
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
 
     
-    
-        
-            </div></section>
-        
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a>
-            </div>
-            <div class="date"><time datetime="2018-04-30T22:29:41.000Z" itemprop="datePublished">2018-04-30</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/04/30/lambda-expressions-part-six/">06 - The consumer Interface</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-“Whatever goes in, never comes out” could be the Hollywood movie line to define a consumer, which is no more than a function that receives an argument, consumes it and returns nothing.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a>
-            </div>
-            <div class="date"><time datetime="2018-04-25T19:12:11.000Z" itemprop="datePublished">2018-04-25</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/04/25/lambda-expressions-part-five/">05 - The Predicate Interface</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-A predicate can be understood as a function that returns a value that is either true or false. The proper use of it can make your code easier to maintain.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a>
-            </div>
-            <div class="date"><time datetime="2018-04-25T10:49:27.000Z" itemprop="datePublished">2018-04-25</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/04/25/lambda-expressions-part-four/">04 - Function Composition</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Function composition is the ability to create simple and reusable functions that can be combined in order to create more complex functions. Java made this easy
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a>
-            </div>
-            <div class="date"><time datetime="2018-04-23T11:23:43.000Z" itemprop="datePublished">2018-04-23</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/04/23/lambda-expressions-part-three/">03 - The Function Interface</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-It’s now time to slowly start to elaborate and dig deeper in the particular aspects of functions in Java. The language developers made our life easier.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a>
-            </div>
-            <div class="date"><time datetime="2018-04-22T14:49:22.000Z" itemprop="datePublished">2018-04-22</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/04/22/lambda-expressions-part-two/">02 - The Functional Interface</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-In the first post of this easy introductory series we have introduced the basic foundations of how to form a lambda expression.It’s now time to learn how we can use them.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Java-Language/">Java Language</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java-Language/Lambda-Expressions/">Lambda Expressions</a>
-            </div>
-            <div class="date"><time datetime="2018-04-21T21:58:44.000Z" itemprop="datePublished">2018-04-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/04/21/lambda-expressions-part-one/">01 - The genesis of a lambda expression</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-In the first post of this series we will look at the basics of how a lambda expression is formed and what do they bring to the table.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-        
-            </div></section>
-        
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Architecture/">Architecture</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Architecture/Design-Patterns/">Design Patterns</a>
-            </div>
-            <div class="date"><time datetime="2017-12-22T20:36:31.000Z" itemprop="datePublished">2017-12-22</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/12/22/Prototype-Pattern/">Prototype Pattern</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Whenever object instantiation implies a high computational cost or an uncertain availability of data, we should consider the possibility of cloning, as it may be cheaper than creating brand new insta
-        </p>
-    </div>
-</article>
-    
-
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">Page 1 of 2</span>
-        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">»</a>
-    </nav>
+    </section>
 
 
                         </div>
@@ -522,6 +314,19 @@ Whenever object instantiation implies a high computational cost or an uncertain 
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/10/28/Parameterized-unit-tests-with-JUnit5/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Parameterized unit tests with JUnit5</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -662,11 +467,13 @@ Whenever object instantiation implies a high computational cost or an uncertain 
     var disqus_shortname = 'josemartins';
     
     
+    var disqus_url = 'https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
