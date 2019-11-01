@@ -15,19 +15,19 @@
                 
                     <meta name="keywords" content="Testing,Junit 5" />
                     
-                        <meta name="description" content="JUnit5 brings joy to the world of testing, and parameterized tests are no exception. All the limited and somewhat cumbersome way of developing unit tests with t">
+                        <meta name="description" content="JUnit5 brings joy to the world of testing, and the category of parameterized tests is no exception.All the limited and somewhat cumbersome way of developing uni">
 <meta name="keywords" content="Testing,Junit 5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Parameterized unit tests with JUnit5">
 <meta property="og:url" content="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/index.html">
 <meta property="og:site_name" content="JoseMartins">
-<meta property="og:description" content="JUnit5 brings joy to the world of testing, and parameterized tests are no exception. All the limited and somewhat cumbersome way of developing unit tests with the previous version, has gone. Kudos fo">
+<meta property="og:description" content="JUnit5 brings joy to the world of testing, and the category of parameterized tests is no exception.All the limited and somewhat cumbersome way of developing unit tests with the previous version, has">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/parameterizedUnitTestsJ5.jpg">
-<meta property="og:updated_time" content="2019-10-30T00:22:05.337Z">
+<meta property="og:updated_time" content="2019-11-01T00:16:14.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Parameterized unit tests with JUnit5">
-<meta name="twitter:description" content="JUnit5 brings joy to the world of testing, and parameterized tests are no exception. All the limited and somewhat cumbersome way of developing unit tests with the previous version, has gone. Kudos fo">
+<meta name="twitter:description" content="JUnit5 brings joy to the world of testing, and the category of parameterized tests is no exception.All the limited and somewhat cumbersome way of developing unit tests with the previous version, has">
 <meta name="twitter:image" content="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/parameterizedUnitTestsJ5.jpg">
                             
 
@@ -186,8 +186,8 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <img src="/2019/10/28/Parameterized-unit-tests-with-JUnit5/parameterizedUnitTestsJ5.jpg" title="[parameterized test]">
-<p>JUnit5 brings joy to the world of testing, and parameterized tests are no exception. All the limited and somewhat cumbersome way of developing unit tests with the previous version, has gone. Kudos for the JUnit team for a great framework, and kudos for an excellent documentation that you can find <a href="https://junit.org/junit5/docs/current/user-guide/" target="_blank" rel="noopener">here</a>. </p>
-<p>Having said that, lets take a quick look into the main differences provided by JUnit 5, in the area of parameterized tests :</p>
+<p>JUnit5 brings joy to the world of testing, and the category of parameterized tests is no exception.<br>All the limited and somewhat cumbersome way of developing unit tests with the previous version, has gone. Kudos for the JUnit team for a great framework, and kudos for an excellent documentation that you can find <a href="https://junit.org/junit5/docs/current/user-guide/" target="_blank" rel="noopener">here</a>. </p>
+<p>Having said that, let’s take a quick look at the main differences provided by JUnit 5, in the area of parameterized tests :</p>
 <ul>
 <li>We can run parameterized tests mixed with regular ones in the same class.</li>
 <li>We can have several completely different parameterized tests in the same class, receiving different datasets.</li>
@@ -202,7 +202,7 @@ ga('send', 'pageview');
 <figure class="highlight java"><figcaption><span>Purchase.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Purchase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">private</span> PurchaseStatus status;</span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">private</span> TransactionStatus transactionStatus;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The purchase can have 4 different Purchase statuses that are enumerated</p>
 <figure class="highlight java"><figcaption><span>PurchaseStatus.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> PurchaseStatus &#123;</span><br><span class="line">    CONFIRMED,</span><br><span class="line">    COMPLETED,</span><br><span class="line">    FAILED,</span><br><span class="line">    PENDING;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>and also 7 Transaction status, also enumerated </p>
+<p>and also seven Transaction status, also enumerated </p>
 <figure class="highlight java"><figcaption><span>TransactionStatus.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> TransactionStatus &#123;</span><br><span class="line">    NEW,</span><br><span class="line">    PENDINGCHARGE,</span><br><span class="line">    FAILEDCHARGE,</span><br><span class="line">    CHARGED,</span><br><span class="line">    PENDINGCREDIT,</span><br><span class="line">    FAILEDCREDIT,</span><br><span class="line">    CREDITED</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>We need to process the purchases. For the purpose we have a purchaseJob that will do the work.<br>As long as the purchase has a <code>COMPLETED</code> status it will be processed and for all the other statuses it will not. In our example, we just return true or false, depending on the Purchase status. if a null purchase is supplied to the <strong>process()</strong> method, an exception will be thrown.</p>
 <p>We also have a <strong>getPaidPurchases()</strong> which will act as an imaginary DAO, returning a collection of <code>COMPLETED</code> purchases.</p>
@@ -213,10 +213,10 @@ ga('send', 'pageview');
 <p>The first thing that jumps to the eye, is that there is no <strong><em>public</em></strong> access modifier in test methods. You can use it if you want. But there is no need for it.</p>
 <p>There is no class level annotation indicating any specific runner.</p>
 <p>The <strong>purchaseStatusNegativeDataSet()</strong> static method, responsible for supplying a collection of purchases, has no annotation.<br>So how does a parameterized test knows where to get the information from ?</p>
-<p>Easy. By annotating a method with <code>@ParameterizedTest</code> we are saying that we want a parameterized test and by the <code>@MethodSource(&quot;purchaseStatusNegativeDataSet&quot;)</code> we indicate where the dataset is coming from.<br>Then we just add a parameter to the method, and JUnit 5 will take care of injecting every item from the collection in that test and run it as many times as the number of items in the collection. We can see it in <strong>processPurchase_returnsFalse_forNotCompletedPurchaseStatus</strong></p>
+<p>Easy. By annotating a method with <code>@ParameterizedTest</code> we are saying that we want a parameterized test, and with the <code>@MethodSource(&quot;purchaseStatusNegativeDataSet&quot;)</code> we indicate where the dataset is coming from.<br>With those 2 annotations in place, we just need to add a parameter to the method, and JUnit 5 will take care of injecting every item from the collection and run it as many times as the number of items in the collection. We can see it in <strong>processPurchase_returnsFalse()</strong>.</p>
 <p>Lets look now at the <strong>processPurchase_withNullPurchase_throwsIllegalArgumentException</strong> method. </p>
-<p>This is also considered a parameterized test, so the <code>@ParameterizedTest</code> annotation is present and also a <code>@NullSource</code>. The later indicates that we want to run the method with a <strong><em>null</em></strong> argument. So wherever, in the method, we use the argument JUnit 5 will make replace it by a <code>null</code>.</p>
-<p>The next one, is a standard <strong>@Test</strong> method. It lives happily amongst the parameterized ones.</p>
+<p>This is also considered a parameterized test, so annotation <code>@ParameterizedTest</code> is present and also <code>@NullSource</code>. The later indicates that we want to run the method with a <strong><em>null</em></strong> argument. So whenever, in the method, we use the argument JUnit 5 will replace it by a <code>null</code>.</p>
+<p>The <strong>processPurchase_returnsTrue()</strong>, is a standard <strong>@Test</strong> method. It lives happily amongst the parameterized ones.</p>
 <p>To finalize we have the <strong>paidPurchases_haveAllTransactionStatusAsCharged</strong>. A parameterized method that receives an enum as an argument, hence the <code>@EnumSource</code> annotation that will specify the Enum to be supplied. As you can see we can exclude as many constants as we want from the test (separating them by comma). In this case we are just excluding the <code>CHARGED</code> one.</p>
 <p>You will find much more in JUnit 5 excellent user guide section devoted to <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests" target="_blank" rel="noopener">parameterized tests</a> </p>
 <p>I hope this little post drives your curiosity to explore and start adding JUnit5 to your projects.</p>
@@ -229,7 +229,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/" data-id="ck2cjcgxg0005gg7t62mxdqzj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/10/28/Parameterized-unit-tests-with-JUnit5/" data-id="ck2fdnu1s00003u7tlzzbzz7d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
