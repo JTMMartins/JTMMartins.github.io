@@ -15,18 +15,18 @@
                 
                     <meta name="keywords" content="Testing,Junit 5,Spring-boot" />
                     
-                        <meta name="description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes, we might have a solution to your pro">
+                        <meta name="description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes (because you are actually not using 5">
 <meta name="keywords" content="Testing,Junit 5,Spring-boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Junit 5 and Spring boot 2.1.X-Maven importing wrong JUnit version">
 <meta property="og:url" content="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/index.html">
 <meta property="og:site_name" content="JoseMartins">
-<meta property="og:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes, we might have a solution to your problem. A couple of days ago, I was writin">
+<meta property="og:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes (because you are actually not using 5.5.2), we might have a solution to your">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-01T01:53:04.967Z">
+<meta property="og:updated_time" content="2019-11-01T01:55:30.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Junit 5 and Spring boot 2.1.X-Maven importing wrong JUnit version">
-<meta name="twitter:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes, we might have a solution to your problem. A couple of days ago, I was writin">
+<meta name="twitter:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes (because you are actually not using 5.5.2), we might have a solution to your">
                             
 
                                 
@@ -183,7 +183,7 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes, we might have a solution to your problem.</p>
+            <p>If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes <sub><sup>(because you are actually not using 5.5.2)</sup></sub>, we might have a solution to your problem.</p>
 <p>A couple of days ago, I was writing a unit test and surprisingly the IDE complained it couldn’t find where to import from interface for <code>@NullSource</code>. Well, I knew it does exists in JUnit 5, I’ve used it before and it is on JUnit Javadoc for the version 5.5.2.<br>This is one of those moments when we scratch our head with a <em>“What the heck”</em>…</p>
 <p>I revised the Pom file, just to make sure I had not made any mistake in the version, and it was correct, 5.5.2 <sub><sup>(at the time of this post, this is the latest stable version)</sup></sub>. I had defined it in the Pom properties as <code>&lt;version.junit&gt;5.5.2&lt;/version.junit&gt;</code> and was also excluding JUnit from the <em><artifactid>spring-boot-starter-test</artifactid></em>. The dependencies section also had the corresponding </p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;version.junit&#125;&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
@@ -206,7 +206,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" data-id="ck2fhh3t80009fw7tn0uvghmq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" data-id="ck2fhk8kb0003ol7tgwistihr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
