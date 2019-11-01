@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="JoseMartins">
 <meta property="og:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes (because you are actually not using 5.5.2), we might have a solution to your">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-01T01:55:30.355Z">
+<meta property="og:updated_time" content="2019-11-01T01:57:12.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Junit 5 and Spring boot 2.1.X-Maven importing wrong JUnit version">
 <meta name="twitter:description" content="If you are trying to use JUnit 5.5.2 together with Spring Boot 2.1.X, and find out that you are missing some JUnit classes (because you are actually not using 5.5.2), we might have a solution to your">
@@ -188,7 +188,7 @@ ga('send', 'pageview');
 <p>I revised the Pom file, just to make sure I had not made any mistake in the version, and it was correct, 5.5.2 <sub><sup>(at the time of this post, this is the latest stable version)</sup></sub>. I had defined it in the Pom properties as <code>&lt;version.junit&gt;5.5.2&lt;/version.junit&gt;</code> and was also excluding JUnit from the <em><artifactid>spring-boot-starter-test</artifactid></em>. The dependencies section also had the corresponding </p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;version.junit&#125;&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 <p>so, everything looked correct.</p>
-<p>A quick look into the .m2 folder, revealed the presence of version 5.3.2, so I deleted it and run maven clean package on the project while monitoring the <code>.m2/repository/org/junit/jupiter/junit-jupiter-params</code>  folder. To my surprise, version 5.3.2 magically reappeared. Unfortunately, this is one of those things we now will make us lose some precious time while trying to pinpoint the problem.</p>
+<p>A quick look into the .m2 folder, revealed the presence of version 5.3.2, so I deleted it and run <em>maven clean package</em> on the project while monitoring the <code>.m2/repository/org/junit/jupiter/junit-jupiter-params</code>  folder. To my surprise, version 5.3.2 magically reappeared. Unfortunately, this is one of those things we now will make us lose some precious time while trying to pinpoint the problem.</p>
 <p>In another project I had JUnit working perfectly with version 5.5.2, but the “offending” project was using Spring boot 2.1.7.RELEASE and the other wasn’t, so I focused my attention on that.</p>
 <h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><p>By checking Spring boot’s 2.1.7-RELEASE <a href="https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/2.1.7.RELEASE/spring-boot-dependencies-2.1.7.RELEASE.pom" target="_blank" rel="noopener">dependencies</a>, we can verify it imports <code>&lt;junit-jupiter.version&gt;5.3.2&lt;/junit-jupiter.version&gt;</code>, and that’s not the version we want.</p>
 <p>The solution is then, very simple. </p>
@@ -206,7 +206,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" data-id="ck2fhk8kb0003ol7tgwistihr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jtmmartins.github.io/2019/11/01/Junit5-and-Springboot-Maven-importing-wrong-version/" data-id="ck2fhmdui0005s37tc36rcq07" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
